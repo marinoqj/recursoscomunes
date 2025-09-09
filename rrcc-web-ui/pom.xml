@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		
+	<groupId>es.golemdr.rrcc.webui</groupId>
+	<artifactId>rrcc-web-ui</artifactId>
+	<packaging>jar</packaging>
+	<name>webui</name>
+	<description>Frontal para los microservicios de Recursos Comunes con Spring Boot</description>
+	<version>1.0.0</version>
+
+    <parent>
+        <groupId>es.golemdr.rrcc</groupId>
+        <artifactId>recursos-comunes</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>17</java-version>				
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>        	
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webflux</artifactId>
+		</dependency>	
+		<dependency>
+		    <groupId>io.projectreactor.netty</groupId>
+		    <artifactId>reactor-netty</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		</dependency>			
+	</dependencies>
+    <build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>				
+				<executions>
+					<execution>
+						<id>copy-application-yml</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<delete
+									file="src/main/resources/application.yml" />
+								<copy
+									file="src/main/resources/${environment.yml}"
+									tofile="src/main/resources/application.yml" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>reset-application-properties</id>
+						<phase>verify</phase>
+						<configuration>
+							<target>
+								<delete
+									file="src/main/resources/application.yml" />
+								<copy
+									file="src/main/resources/application-local.yml"
+									tofile="src/main/resources/application.yml" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+    <profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>				
+				<environment.yml>application-local.yml</environment.yml>
+				<environment.name>LOCAL</environment.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>desa</id>
+			<properties>
+				<environment.yml>application-desa.yml</environment.yml>
+				<environment.name>DESA</environment.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>developer</id>
+			<properties>
+				<environment.yml>application-developer.yml</environment.yml>
+				<environment.name>DEVELOPER</environment.name>
+			</properties>
+		</profile>
+    </profiles>
+</project>

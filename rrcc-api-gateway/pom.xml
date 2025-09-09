@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.golemdr.rrcc.apigateway</groupId>
+    <artifactId>rrcc-api-gateway</artifactId>
+    <packaging>jar</packaging>
+    <description>Recursos Comunes API Gateway</description>
+    <version>1.0.0</version>
+
+	<parent>
+		<groupId>es.golemdr.rrcc</groupId>
+		<artifactId>recursos-comunes</artifactId>
+        <version>1.0.0</version>
+	</parent>
+
+    <properties>
+        <docker.image.exposed.port>8081</docker.image.exposed.port>
+        <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-config</artifactId>-->
+<!--        </dependency> -->
+        <dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+        <!-- Third parties -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>				
+				<executions>
+					<execution>
+						<id>copy-application-yml</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<delete
+									file="src/main/resources/application.yml" />
+								<copy
+									file="src/main/resources/${environment.yml}"
+									tofile="src/main/resources/application.yml" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>reset-application-properties</id>
+						<phase>verify</phase>
+						<configuration>
+							<target>
+								<delete
+									file="src/main/resources/application.yml" />
+								<copy
+									file="src/main/resources/application-local.yml"
+									tofile="src/main/resources/application.yml" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+    <profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>				
+				<environment.yml>application-local.yml</environment.yml>
+				<environment.name>LOCAL</environment.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>desa</id>
+			<properties>
+				<environment.yml>application-desa.yml</environment.yml>
+				<environment.name>DESA</environment.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>developer-jqj</id>
+			<properties>
+				<environment.yml>application-developer-jqj.yml</environment.yml>
+				<environment.name>DEVELOPER-JQJ</environment.name>
+			</properties>
+		</profile>
+    </profiles>
+</project>
