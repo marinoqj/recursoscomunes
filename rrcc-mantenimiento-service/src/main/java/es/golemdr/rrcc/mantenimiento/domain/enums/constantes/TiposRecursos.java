@@ -1,0 +1,22 @@
+package es.golemdr.rrcc.mantenimiento.domain.enums.constantes;
+
+import lombok.Getter;
+
+@Getter
+public enum TiposRecursos {
+	
+	PISTA_PADEL("01", "Pista de padel"),
+	PISTA_TENIS("02", "Pista de tenis");
+
+	private String tipo;
+	private String descripcion;
+	
+	TiposRecursos(String tipo, String descripcion) {		
+		this.tipo = tipo;
+		this.descripcion = descripcion;
+	}
+
+	
+	
+	
+}
