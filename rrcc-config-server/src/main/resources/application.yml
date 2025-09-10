@@ -1,0 +1,26 @@
+# Fichero de propiedades comunes a todos los servicios que se configuren desde el config server  
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native: 
+          search-locations: "[classpath:/, classpath:/config, classpath:/config/{application}, classpath:/config/{application}/{profile}]"
+ 
+logging:
+  level:
+    org.hibernate: "debug"
+    org.springframework:
+        web: "info"
+        boot: "info"
+    es.golemdr.rrcc: "info"
+    com.fasterxml.jackson: "info"
+
+
+
