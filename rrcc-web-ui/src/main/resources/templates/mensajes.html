@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head :: head('Módulo de Gestión')">
+
+</head>
+
+<body>
+
+	<header>
+		<nav th:replace="fragments/navbar :: navbar"></nav>
+	</header>
+
+	<main>
+		<div class="container" style="min-height: 90vh">
+
+<br><br><br><br><br><br>
+
+			<div class="row" th:if="${mensajeError != null}">
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+				<div class="col-md-8 col-lg-8 align-middle alert alert-danger"><div id="rojo"><i class="fas fa-info-circle fa-2x"></i>&nbsp;&nbsp;[[${mensajeError}]]</div></div>
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+			</div>
+			
+			<div class="row" th:if="${mensajeOK != null}">
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+				<div class="col-md-8 col-lg-8 align-middle alert alert-success"><div id="verde"><i class="fas fa-check-circle fa-2x"></i>&nbsp;&nbsp;[[${mensajeOK}]]</div></div>
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+			</div>	
+
+		</div>
+	</main>
+
+
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+
+
+
+</body>
+</html>

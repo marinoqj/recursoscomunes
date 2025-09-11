@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head :: head('Módulo de Gestión')">
+
+</head>
+
+<body>
+
+	<header>
+		<nav th:replace="fragments/navbar :: navbar"></nav>
+	</header>
+
+	<main>
+		<div class="container" style="min-height: 90vh">
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row" th:if="${mensaje != null}">
+	<div class="col-md-2 col-lg-2">&nbsp;</div>
+	<div class="col-md-8 col-lg-8 align-middle alert alert-danger"><div id="rojo"><i class="fas fa-info-circle fa-2x"></i>&nbsp;&nbsp;[[${mensaje}]]</div></div>
+	<div class="col-md-2 col-lg-2">&nbsp;</div>
+</div>
+
+<br>
+<br>
+<br>
+
+BANDEJA DE ENTRADA
+
+<br>
+<br>
+<br>
+
+<div class="row">
+	<div class="col-md-12 text-center"><h3>CONCURSO EXTRAORDINARIO - MÓDULO DE GESTIÓN</h3></div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 text-center"><img src='static/imagenes/docentes.jpg'/></div>
+</div>
+
+		</div>
+	</main>
+
+
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+
+
+
+</body>
+</html>

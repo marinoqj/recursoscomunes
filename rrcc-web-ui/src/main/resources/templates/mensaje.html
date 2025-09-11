@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head :: head('Módulo de Gestión')">
+
+</head>
+
+<body>
+
+	<header>
+		<nav th:replace="fragments/navbar :: navbar"></nav>
+	</header>
+
+	<main>
+		<div class="container" style="min-height: 90vh">
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+			<div class="row" th:if="${mensaje != null}">
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+				<div th:classappend="${tipoMensaje} ? 'alert-warning' : 'alert-success'" class="col-md-8 col-lg-8 text-center alert"><i class="fas fa-info-circle fa-2x"></i>&nbsp;&nbsp;[[${mensaje}]]</div>
+				<div class="col-md-2 col-lg-2">&nbsp;</div>
+			</div>
+		</div>
+	</main>
+
+
+
+	<footer th:replace="fragments/footer :: footer"></footer>
+
+
+
+</body>
+</html>

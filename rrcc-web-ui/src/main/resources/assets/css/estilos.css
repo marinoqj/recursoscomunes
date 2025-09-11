@@ -1,0 +1,35 @@
+/* Para cambiar el color de la fuente del men� */
+nav .navbar-nav li a{
+ color: white !important;
+}
+
+.navbar-nav > li > .dropdown-menu {     background-color: #277bba;  }
+
+.navbar-nav > li > .dropdown-menu a{   color: white;  }
+
+.navbar-nav > li > .dropdown-menu a:hover{   color: #277bba !important;  }
+
+.texto-azul{
+	color: #277bba;	
+}
+
+.bg-azul {
+    background-color: #277bba;
+}
+
+.custom-disabled {
+	background-color: #e0e0e0; /* Color de fondo gris */
+	color: #a0a0a0; /* Color del texto gris */
+	pointer-events: none; /* Deshabilita los eventos de clic */
+	cursor: not-allowed; /* Cambia el cursor a no permitido */
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #ffffff;
+	background-color: #0d6efd;
+	border-color: #dee2e6 #dee2e6 #ffffff;
+}
+
+.tab-errores { 
+	color: red; 
+}

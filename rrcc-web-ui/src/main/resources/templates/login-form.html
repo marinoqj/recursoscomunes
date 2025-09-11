@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('Centros concertados')">
+
+</head>
+
+<body>
+
+<header>
+    <div class="container-fluid" style="background-color: #277bba; color: white; padding: 0 !important;">
+        <a class="navbar-brand" href="#"><img alt="Escudo del MEFP" class="d-inline-block"
+                                              th:src="@{/static/imagenes/escudo-mefp.png}"></a>
+    </div>
+</header>
+
+<main>
+    <!-- CONTAINER -->
+    <div class="container-fluid" style="min-height:90vh">
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <br>
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-4 text-center">
+                <div class="row">
+                    <div class="col-md-2">&nbsp;</div>
+                    <div class="col-md-8">
+                        <form class="shadow p-3 mb-5 bg-white rounded text-center border" method="post"
+                              th:action="login">
+                            <div class="p-4">
+
+                                <span class="h4 mb-4">Acceso a la aplicación</span>
+                                <br><br>
+                                <img height="100" th:src="@{/static/imagenes/user-circle-solid.png}" width="100">
+                                <br><br>
+                                <!-- Name -->
+                                <input class="form-control mb-4" name="username" placeholder="Usuario" type="text">
+
+                                <!-- Password -->
+                                <input class="form-control mb-4" name="password" placeholder="Password" type="password">
+
+                                <!-- Sign in button -->
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary" type="submit">Entrar</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-md-4">&nbsp;</div>
+        </div>
+        <!-- ./ROW -->
+        <!-- ROW -->
+        <div class="row" th:if="${mensaje != null}">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-4 align-middle alert alert-danger">
+                <div id="rojo"><i class="fas fa-info-circle fa-2x"></i>&nbsp;&nbsp;[[${mensaje}]]</div>
+            </div>
+            <div class="col-md-4">&nbsp;</div>
+        </div>
+        <!-- ./ROW -->
+    </div>
+    <!-- ./CONTAINER -->
+
+    <br>
+
+
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+
+</body>
+</html>

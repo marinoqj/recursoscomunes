@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: webui
+    
+server:
+  port: 8877
+  servlet:
+    context-path: /rrcc
+
+api:
+  server:
+    name: http://localhost
+    context: /
+    port: 8091   	
+
+  
