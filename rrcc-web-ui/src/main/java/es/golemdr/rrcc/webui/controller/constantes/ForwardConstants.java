@@ -9,5 +9,6 @@ public class ForwardConstants {
 	
 	public static final String FWD_LISTADO_USUARIOS = "usuarios/listado-usuarios";
 	public static final String FWD_USUARIO_FORM = "usuarios/usuario-form";
+	public static final String RED_LISTADO_USUARIOS = "redirect:listadoUsuarios";
 
 }

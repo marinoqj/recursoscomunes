@@ -56,46 +56,13 @@
 				<!-- Grid row -->
 				<div class="row">
 					<!-- Default input -->
-					<div class="form-group col-md-4">
-						<label for="nombre">Nombre</label><span class="form-text text-danger"> *</span>
-						<input type="text" class="form-control" th:field="*{nombre}">
-						<span class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>	
-					</div>
-					<!-- Default input -->
-					<div class="form-group col-md-4">
-						<label for="apellido1">Primer apellido</label><span class="form-text text-danger"> *</span>
-						<input type="text" class="form-control" th:field="*{apellido1}">
-						<span class="form-text text-danger" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></span>	
-					</div>
-					<!-- Default input -->
-					<div class="form-group col-md-4">
-						<label for="apellido2">Segundo apellido</label>
-						<input type="text" class="form-control" th:field="*{apellido2}">
-						<span class="form-text text-danger" th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></span>	
+					<div class="form-group col-md-12">
+						<label for="identificador">Identificador</label><span class="form-text text-danger"> *</span>
+						<input type="text" class="form-control" th:field="*{identificador}">
+						<span class="form-text text-danger" th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></span>	
 					</div>
 				</div>
-				<br>
-				<!-- Grid row -->
-				<div class="row">
-					<!-- Default input -->
-					<div class="form-group col-md-4">
-						<label for="login">Login</label><span class="form-text text-danger"> *</span>
-						<input type="text" class="form-control" th:field="*{login}">
-						<span class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>	
-					</div>
-					<!-- Default input -->
-					<div class="form-group col-md-4">
-						<label for="habilitacion">Habilitación</label><span class="form-text text-danger"> *</span>
-						<select	th:field="*{habilitacion}" class="form-select">
-								<option value="">Seleccione la habilitación</option>
-								<option th:each="habilitacion : ${habilitaciones}" th:value="${habilitacion}"
-									th:text="${habilitacion}"></option>
-						</select>						
-						<span class="form-text text-danger" th:if="${#fields.hasErrors('habilitacion')}" th:errors="*{habilitacion}"></span>	
-					</div>
-					<!-- Default input -->
-					<div class="form-group col-md-8">&nbsp;</div>
-				</div>								
+				<br>							
 				<div class="row">
 					<div class="form-group col-md-12 align-self-end text-end">
 							<a th:href="@{/listadoUsuarios}"  class="btn btn-secondary btn-sm px-4">Cancelar</a>

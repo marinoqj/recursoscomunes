@@ -10,14 +10,14 @@ public interface UsuariosService {
 
 	List<Usuario> recuperarUsuarios();
 	
-//	Customer getCustomerById(String id);
-//	
-//	Customer updateCustomer(Customer customer);
-//	
-//	Customer insertCustomer(Customer customer);
-//
-//	void deleteCustomer(String id);
-//	
-//	Customer registerCustomer(Customer customer);
+	Usuario recuperarUsuarioPorId(String id);
+	
+	Usuario actualizarUsuario(Usuario usuario);
+	
+	Usuario insertarUsuario(Usuario usuario);
+
+	void borrarUsuario(String id);
+	
+
 	
 }
