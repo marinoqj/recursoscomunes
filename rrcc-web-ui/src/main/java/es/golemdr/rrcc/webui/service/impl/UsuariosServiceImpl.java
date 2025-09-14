@@ -12,10 +12,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class UsuariosServiceImpl extends BaseService implements UsuariosService {
 
+	private static final String USUARIOS_PATH = "/usuarios";
 	
 	public List<Usuario> recuperarUsuarios() {
 		return webClient.get()
-				.uri(serverName + ":" + port + context + "/usuarios")
+				.uri(serverName + ":" + port + context + USUARIOS_PATH)
 				.retrieve()
 				.bodyToFlux(Usuario.class)
 				.collectList()
@@ -24,14 +25,14 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 
 	@Override
 	public Usuario insertarUsuario(Usuario usuario) {
-		return webClient.post().uri(serverName + ":" + port + context + "/usuarios")
+		return webClient.post().uri(serverName + ":" + port + context + USUARIOS_PATH)
 				.body(Mono.just(usuario), Usuario.class).retrieve().bodyToMono(Usuario.class).block();
 	}
 
 	@Override
 	public Usuario recuperarUsuarioPorId(String id) {
 		return webClient.get()
-				.uri(serverName + ":" + port + context + "/usuarios/" + id)
+				.uri(serverName + ":" + port + context + USUARIOS_PATH + "/" + id)
 				.retrieve()
 				.bodyToMono(Usuario.class)
 				.block();
@@ -39,14 +40,14 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 
 	@Override
 	public Usuario actualizarUsuario(Usuario usuario) {
-		return webClient.put().uri(serverName + ":" + port + context + "/usuarios")
+		return webClient.put().uri(serverName + ":" + port + context + USUARIOS_PATH)
 				.body(Mono.just(usuario), Usuario.class).retrieve().bodyToMono(Usuario.class).block();
 	}
 
 	@Override
 	public void borrarUsuario(String id) {
 		webClient.delete()
-		.uri(serverName + ":" + port + context + "/usuarios/" + id)
+		.uri(serverName + ":" + port + context + USUARIOS_PATH + "/" + id)
 		.retrieve()
 		.toBodilessEntity()
 		.block();

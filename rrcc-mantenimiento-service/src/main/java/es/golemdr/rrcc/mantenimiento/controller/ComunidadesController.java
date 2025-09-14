@@ -31,7 +31,7 @@ public class ComunidadesController {
 
 	private static final Logger log = LoggerFactory.getLogger(ComunidadesController.class);
 
-	public static final String ID_COMUNIDAD = "idComunidad";
+	private static final String ID_COMUNIDAD = "idComunidad";
 
 	private ComunidadesService comunidadesService;
 
