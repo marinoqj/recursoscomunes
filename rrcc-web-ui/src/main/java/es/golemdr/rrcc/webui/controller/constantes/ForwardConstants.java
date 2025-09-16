@@ -11,5 +11,9 @@ public class ForwardConstants {
 	public static final String FWD_LISTADO_USUARIOS = "usuarios/listado-usuarios";
 	public static final String FWD_USUARIO_FORM = "usuarios/usuario-form";
 	public static final String RED_LISTADO_USUARIOS = "redirect:listadoUsuarios";
+	
+	public static final String FWD_LISTADO_RECURSOS = "recursos/listado-recursos";
+	public static final String FWD_RECURSO_FORM = "recursos/recurso-form";
+	public static final String RED_LISTADO_RECURSOS = "redirect:listadoRecursos";
 
 }

@@ -13,35 +13,35 @@ import es.golemdr.rrcc.mantenimiento.service.RecursosService;
 @Service
 public class RecursosServiceImpl implements RecursosService {
 	
-	private RecursosRepository recursoesRepository;
+	private RecursosRepository recursosRepository;
 	
 	
-	public RecursosServiceImpl(RecursosRepository recursoesRepository) {
+	public RecursosServiceImpl(RecursosRepository recursosRepository) {
 		super();
-		this.recursoesRepository = recursoesRepository;
+		this.recursosRepository = recursosRepository;
 	}
 
 
 	@Override
 	public Recurso insertarActualizar(Recurso recurso) {
-		return recursoesRepository.save(recurso);
+		return recursosRepository.save(recurso);
 	}
 
 
 	@Override
 	public Optional<Recurso> recuperarRecursoPorId(int idRecurso) {
-		return recursoesRepository.findById(idRecurso);
+		return recursosRepository.findById(idRecurso);
 	}
 
 
 	@Override
 	public List<Recurso> recuperarRecursos() {
-		return recursoesRepository.findAll();
+		return recursosRepository.findAll();
 	}
 
 	@Override
 	public void borrarRecurso(int idRecurso) {
-		recursoesRepository.deleteById(idRecurso);
+		recursosRepository.deleteById(idRecurso);
 	}
 
 

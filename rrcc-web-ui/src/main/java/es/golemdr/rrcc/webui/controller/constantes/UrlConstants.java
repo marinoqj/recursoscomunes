@@ -19,5 +19,13 @@ public class UrlConstants {
 	public static final String EDITAR_USUARIO = "/editarUsuario";
 	public static final String ACTUALIZAR_USUARIO = "/actualizarUsuario";	
 	public static final String BORRAR_USUARIO = "/borrarUsuario";
+	
+	// Recursos
+	public static final String LISTADO_RECURSOS = "/listadoRecursos";
+	public static final String VER_ALTA_RECURSO = "/verAltaRecurso";
+	public static final String INSERTAR_RECURSO = "/insertarRecurso";
+	public static final String EDITAR_RECURSO = "/editarRecurso";
+	public static final String ACTUALIZAR_RECURSO = "/actualizarRecurso";	
+	public static final String BORRAR_RECURSO = "/borrarRecurso";
 
 }
