@@ -9,11 +9,13 @@ public interface UsuariosService {
 	
 	Usuario insertarActualizar(Usuario usuario);
 	
-	Optional<Usuario> recuperarUsuarioPorId(int usuario);
+	Optional<Usuario> recuperarUsuarioPorId(int idUsuario);
 	
 	List<Usuario> recuperarUsuarios();
 
     void borrarUsuario(int idComunidad);
+    
+    List<Usuario> recuperarUsuariosPorComunidad(int idComunidad);
     
     
     

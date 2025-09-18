@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
 import es.golemdr.rrcc.webui.domain.Comunidad;
+import es.golemdr.rrcc.webui.domain.Usuario;
 import es.golemdr.rrcc.webui.domain.form.ComunidadForm;
 import es.golemdr.rrcc.webui.service.ComunidadesService;
+import es.golemdr.rrcc.webui.service.UsuariosService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -23,10 +26,13 @@ public class ComunidadesController {
 	
 	private ComunidadesService comunidadesService;
 	
+	private UsuariosService usuariosService;
+	
 
-	public ComunidadesController(ComunidadesService comunidadesService) {
+	public ComunidadesController(ComunidadesService comunidadesService, UsuariosService usuariosService) {
 		super();
 		this.comunidadesService = comunidadesService;
+		this.usuariosService = usuariosService;
 	}
 
 	@GetMapping(value=UrlConstants.LISTADO_COMUNIDADES)
@@ -127,5 +133,23 @@ public class ComunidadesController {
 		model.addAttribute("mensaje", "La comunidad se borró correctamente");
 		
 		return list(model.asMap(), request);
+	}
+	
+	@PostMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD)
+	public String listUsuariosComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
+
+		List<Usuario> usuarios = usuariosService.recuperarUsuarios(idComunidad);
+		map.put("usuarios", usuarios);
+		
+		Comunidad comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
+		map.put("comunidad", comunidad);
+		
+		return ForwardConstants.FWD_LISTADO_USUARIOS;
+	}
+	
+	@GetMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD_GET)
+	public String redListUsuariosComunidad(@PathVariable String idComunidad, Map<String, Object> map, HttpServletRequest request){
+
+		return listUsuariosComunidad(idComunidad, map, request);
 	}
 }

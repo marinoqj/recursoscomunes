@@ -51,6 +51,7 @@
   	<!-- Datos personales -->
 	<form th:action="${modo + 'Usuario'}" th:object="${usuarioForm}" method="post">
 		<input type="hidden" th:field="*{idUsuario}"/>
+		<input type="hidden" th:field="*{idComunidad}"/>
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Grid row -->

@@ -80,6 +80,8 @@
 <!-- 						<td th:text="${comunidad.apellido2}" /> -->
 <!-- 						<td th:text="${comunidad.habilitacion}" />						  -->
 				        <td>
+					      	<a href="#" th:onclick="javascript:listadoUsuariosComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-building fa-lg" data-toggle="tooltip" title="Ver usuarios"></i></a>
+					      	&nbsp;&nbsp;&nbsp;&nbsp;					        
 					      	<a href="#" th:onclick="javascript:editarComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-user-edit fa-lg" data-toggle="tooltip" title="Editar"></i></a>
 					      	&nbsp;&nbsp;&nbsp;&nbsp;			      	
 					      	<a href="#" th:onclick="javascript:mostrarConfirm([[${comunidad.idComunidad}]])"><i class="fa fa-trash fa-lg text-danger" data-toggle="tooltip" title="Borrar"></i></a>				      	
@@ -160,6 +162,13 @@ function editarComunidad(idComunidad){
 	
 	document.formulario.idComunidad.value = idComunidad;	
 	document.formulario.action="editarComunidad";
+	document.formulario.submit();
+}
+
+function listadoUsuariosComunidad(idComunidad){
+	
+	document.formulario.idComunidad.value = idComunidad;	
+	document.formulario.action="listadoUsuariosComunidad";
 	document.formulario.submit();
 }
 

@@ -14,6 +14,7 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 
 	private static final String USUARIOS_PATH = "/usuarios";
 	
+	@Override
 	public List<Usuario> recuperarUsuarios() {
 		return webClient.get()
 				.uri(serverName + ":" + port + context + USUARIOS_PATH)
@@ -52,6 +53,16 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 		.toBodilessEntity()
 		.block();
 		
+	}
+	
+	@Override
+	public List<Usuario> recuperarUsuarios(String idComunidad) {
+		return webClient.get()
+				.uri(serverName + ":" + port + context + USUARIOS_PATH + "/comunidad/" + idComunidad)
+				.retrieve()
+				.bodyToFlux(Usuario.class)
+				.collectList()
+				.block();
 	}
 	
 }

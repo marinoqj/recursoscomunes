@@ -1,10 +1,16 @@
 package es.golemdr.rrcc.mantenimiento.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +31,12 @@ public class Comunidad {
 
     @Column(name = "NOMBRE")
     private String nombre;
+    
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "comunidad")
+    List<Usuario> usuarios;
+    
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "comunidad")
+    List<Recurso> recursos;
 }

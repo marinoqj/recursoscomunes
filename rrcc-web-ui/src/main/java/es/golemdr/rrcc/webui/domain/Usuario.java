@@ -12,5 +12,6 @@ public class Usuario {
 
     private Integer idUsuario;
     private String identificador;
+    private Integer idComunidad;
 
 }

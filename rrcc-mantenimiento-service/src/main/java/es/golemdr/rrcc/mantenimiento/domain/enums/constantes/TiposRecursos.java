@@ -15,8 +15,20 @@ public enum TiposRecursos {
 		this.tipo = tipo;
 		this.descripcion = descripcion;
 	}
-
 	
 	
-	
+	public static TiposRecursos recuperarPorTipo(String tipo) {
+		
+		TiposRecursos constante =  null;
+		
+		for(TiposRecursos tipoRecurso : TiposRecursos.values()) {
+			
+			if(tipoRecurso.tipo.equals(tipo)) {
+				constante = tipoRecurso;
+				break;
+			}
+		}
+		
+		return constante;
+	}
 }

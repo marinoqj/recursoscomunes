@@ -8,5 +8,6 @@ public class UsuarioForm {
 
     private String idUsuario;
     private String identificador;
+    private String idComunidad;
 
 }

@@ -21,6 +21,7 @@ import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 import es.golemdr.rrcc.mantenimiento.domain.Usuario;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
+import es.golemdr.rrcc.mantenimiento.ext.mapper.UsuarioMapper;
 import es.golemdr.rrcc.mantenimiento.service.UsuariosService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -32,6 +33,7 @@ public class UsuariosController {
 	private static final Logger log = LoggerFactory.getLogger(UsuariosController.class);
 
 	public static final String ID_USUARIO = "idUsuario";
+	public static final String ID_COMUNIDAD = "idComunidad";
 
 	private UsuariosService usuariosService;
 
@@ -46,7 +48,8 @@ public class UsuariosController {
 
 		Usuario usuario = new Usuario();
 
-		BeanUtils.copyProperties(usuarioRequest, usuario);
+		//BeanUtils.copyProperties(usuarioRequest, usuario);
+		UsuarioMapper.copiarPropiedades(usuarioRequest, usuario);
 
 		return usuariosService.insertarActualizar(usuario);
 	}
@@ -71,7 +74,8 @@ public class UsuariosController {
 		final Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioRequest.idUsuario()).orElseThrow(
 				() -> new ResourceNotFoundException("Usuario " + usuarioRequest.idUsuario() + " no encontrado"));
 
-		BeanUtils.copyProperties(usuarioRequest, entity);
+		//BeanUtils.copyProperties(usuarioRequest, entity);
+		UsuarioMapper.copiarPropiedades(usuarioRequest, entity);
 
 		return usuariosService.insertarActualizar(entity);
 	}
@@ -82,6 +86,14 @@ public class UsuariosController {
 		usuariosService.borrarUsuario(idUsuario);
 		
 		return recuperarUsuarios();
+	}
+	
+	@GetMapping(value = UrlConstants.LISTADO_USUARIOS_COMUNIDAD_PATH)
+	public List<Usuario> recuperarUsuariosPorComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
+
+		List<Usuario> result = usuariosService.recuperarUsuariosPorComunidad(idComunidad);
+
+		return result;
 	}
 
 }

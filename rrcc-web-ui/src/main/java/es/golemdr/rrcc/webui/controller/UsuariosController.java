@@ -8,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
 import es.golemdr.rrcc.webui.domain.Usuario;
 import es.golemdr.rrcc.webui.domain.form.UsuarioForm;
+import es.golemdr.rrcc.webui.ext.mapper.UsuarioMapper;
 import es.golemdr.rrcc.webui.service.UsuariosService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -40,9 +41,10 @@ public class UsuariosController {
 	}
 	
 	@GetMapping(value = UrlConstants.VER_ALTA_USUARIO)
-	public String verAlta(Model model, HttpServletRequest request) {
+	public String verAlta(@PathVariable String idComunidad, Model model, HttpServletRequest request) {
 
 		UsuarioForm usuarioForm = new UsuarioForm();
+		usuarioForm.setIdComunidad(idComunidad);
 
 		model.addAttribute("modo", "insertar");
 		model.addAttribute("usuarioForm", usuarioForm);
@@ -55,7 +57,7 @@ public class UsuariosController {
 	public String insertar(@Valid UsuarioForm formulario, BindingResult result,  Model model, HttpServletRequest request) {
 		
 		String destino = null;
-		Usuario entity = new Usuario();
+		Usuario usuario = new Usuario();
 		
 		
 		if(result.hasErrors()) {			
@@ -65,10 +67,11 @@ public class UsuariosController {
 			
 		}else {
 			
-			BeanUtils.copyProperties(formulario, entity);	
-			usuariosService.insertarUsuario(entity);
+			UsuarioMapper.copiarPropiedades(formulario, usuario);
+			usuariosService.insertarUsuario(usuario);
 
-			destino = ForwardConstants.RED_LISTADO_USUARIOS;
+			// No se puede utilizar un Forward y concatenarle la comunidad. Hay que construir aquí el destino
+			destino = "redirect:listadoUsuariosComunidad" + formulario.getIdComunidad();
 		}
 				
 
@@ -82,7 +85,7 @@ public class UsuariosController {
 		
 		Usuario usuario = usuariosService.recuperarUsuarioPorId(idUsuario);
 
-		BeanUtils.copyProperties(usuario, usuarioForm);
+		UsuarioMapper.copiarPropiedades(usuario, usuarioForm);
 		
 		usuarioForm.setIdUsuario(usuario.getIdUsuario().toString());
 		
@@ -108,8 +111,7 @@ public class UsuariosController {
 				
 			Usuario usuario  = new Usuario();
 			
-			BeanUtils.copyProperties(formulario, usuario);
-			usuario.setIdUsuario(Integer.valueOf(formulario.getIdUsuario()));
+			UsuarioMapper.copiarPropiedades(formulario, usuario);
 				
 			usuariosService.actualizarUsuario(usuario);
 			
