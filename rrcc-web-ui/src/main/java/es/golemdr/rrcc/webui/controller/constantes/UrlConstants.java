@@ -18,7 +18,7 @@ public class UrlConstants {
 	public static final String LISTADO_USUARIOS = "/listadoUsuarios";
 	public static final String VER_ALTA_USUARIO = "/verAltaUsuario{idComunidad}";
 	public static final String INSERTAR_USUARIO = "/insertarUsuario";
-	public static final String EDITAR_USUARIO = "/editarUsuario";
+	public static final String EDITAR_USUARIO = "/editarUsuario{idComunidad}";
 	public static final String ACTUALIZAR_USUARIO = "/actualizarUsuario";	
 	public static final String BORRAR_USUARIO = "/borrarUsuario";
 	
