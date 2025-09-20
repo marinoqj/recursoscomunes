@@ -1,6 +1,6 @@
-package es.golemdr.rrcc.mantenimiento.domain;
+package es.golemdr.rrcc.common.entity;
 
-import es.golemdr.rrcc.mantenimiento.domain.enums.constantes.TiposRecursos;
+import es.golemdr.rrcc.common.enums.TiposRecursos;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

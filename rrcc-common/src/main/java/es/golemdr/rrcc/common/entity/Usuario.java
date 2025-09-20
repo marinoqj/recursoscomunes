@@ -1,4 +1,4 @@
-package es.golemdr.rrcc.mantenimiento.domain;
+package es.golemdr.rrcc.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

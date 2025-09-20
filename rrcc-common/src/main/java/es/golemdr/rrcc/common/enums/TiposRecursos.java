@@ -1,4 +1,4 @@
-package es.golemdr.rrcc.mantenimiento.domain.enums.constantes;
+package es.golemdr.rrcc.common.enums;
 
 import lombok.Getter;
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
-import es.golemdr.rrcc.mantenimiento.domain.Usuario;
+import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.ext.mapper.UsuarioMapper;
 import es.golemdr.rrcc.mantenimiento.service.UsuariosService;

@@ -1,5 +1,6 @@
 package es.golemdr.rrcc.mantenimiento.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.golemdr.rrcc.common.dto.ComunidadData;
+import es.golemdr.rrcc.common.entity.Comunidad;
+import es.golemdr.rrcc.common.mapper.ComunidadMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.ComunidadRequest;
-import es.golemdr.rrcc.mantenimiento.domain.Comunidad;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.service.ComunidadesService;
 import jakarta.validation.Valid;
@@ -34,21 +37,26 @@ public class ComunidadesController {
 	private static final String ID_COMUNIDAD = "idComunidad";
 
 	private ComunidadesService comunidadesService;
+	
+	private ComunidadMapper comunidadMapper;
 
-	public ComunidadesController(ComunidadesService comunidadesService) {
+	public ComunidadesController(ComunidadesService comunidadesService, ComunidadMapper comunidadMapper) {
 		super();
 		this.comunidadesService = comunidadesService;
+		this.comunidadMapper = comunidadMapper;
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Comunidad createComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
+	public ComunidadData createComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
 
 		Comunidad comunidad = new Comunidad();
 
 		BeanUtils.copyProperties(comunidadRequest, comunidad);
-
-		return comunidadesService.insertarActualizar(comunidad);
+		
+		comunidad = comunidadesService.insertarActualizar(comunidad);
+		
+		return comunidadMapper.toData(comunidad);
 	}
 
 	@GetMapping(value = UrlConstants.ID_COMUNIDAD_PATH)
@@ -57,27 +65,31 @@ public class ComunidadesController {
 	}
 
 	@GetMapping
-	public List<Comunidad> recuperarComunidades() {
+	public List<ComunidadData> recuperarComunidades() {
 
-		List<Comunidad> result = comunidadesService.recuperarComunidades();
+		List<ComunidadData> result = new ArrayList<ComunidadData>();
+		
+		comunidadesService.recuperarComunidades().stream().toList().forEach(c -> result.add(comunidadMapper.toData(c)));
 
 		return result;
 	}
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Comunidad updateComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
+	public ComunidadData updateComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
 
-		final Comunidad entity = comunidadesService.recuperarComunidadPorId(comunidadRequest.idComunidad()).orElseThrow(
+		Comunidad entity = comunidadesService.recuperarComunidadPorId(comunidadRequest.idComunidad()).orElseThrow(
 				() -> new ResourceNotFoundException("Comunidad " + comunidadRequest.idComunidad() + " no encontrada"));
 
 		BeanUtils.copyProperties(comunidadRequest, entity);
 
-		return comunidadesService.insertarActualizar(entity);
+		entity = comunidadesService.insertarActualizar(entity); 
+		
+		return comunidadMapper.toData(entity);
 	}
 
 	@DeleteMapping(value = UrlConstants.ID_COMUNIDAD_PATH)
-	public List<Comunidad> deleteComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
+	public List<ComunidadData> deleteComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
 		
 		comunidadesService.borrarComunidad(idComunidad);
 		

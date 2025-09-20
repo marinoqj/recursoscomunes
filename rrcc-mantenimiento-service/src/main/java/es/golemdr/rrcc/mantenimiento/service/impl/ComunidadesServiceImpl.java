@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import es.golemdr.rrcc.mantenimiento.domain.Comunidad;
+import es.golemdr.rrcc.common.entity.Comunidad;
 import es.golemdr.rrcc.mantenimiento.repository.ComunidadesRepository;
 import es.golemdr.rrcc.mantenimiento.service.ComunidadesService;
 

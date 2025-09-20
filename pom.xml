@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
+		<module>rrcc-common</module>
 		<module>rrcc-api-gateway</module>
 		<module>rrcc-config-server</module>
         <module>rrcc-mantenimiento-service</module>

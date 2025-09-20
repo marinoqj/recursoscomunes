@@ -1,8 +1,9 @@
 package es.golemdr.rrcc.mantenimiento.ext.mapper;
 
+import es.golemdr.rrcc.common.entity.Comunidad;
+import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
-import es.golemdr.rrcc.mantenimiento.domain.Comunidad;
-import es.golemdr.rrcc.mantenimiento.domain.Usuario;
+
 
 public class UsuarioMapper {
 	

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.golemdr.rrcc.common.entity.Recurso;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.RecursoRequest;
-import es.golemdr.rrcc.mantenimiento.domain.Recurso;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.service.RecursosService;
 import jakarta.validation.Valid;

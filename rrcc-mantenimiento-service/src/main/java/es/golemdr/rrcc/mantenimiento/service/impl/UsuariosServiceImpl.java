@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import es.golemdr.rrcc.mantenimiento.domain.Comunidad;
-import es.golemdr.rrcc.mantenimiento.domain.Usuario;
+import es.golemdr.rrcc.common.entity.Comunidad;
+import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.mantenimiento.repository.UsuariosRepository;
 import es.golemdr.rrcc.mantenimiento.service.UsuariosService;
 
