@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import es.golemdr.rrcc.common.dto.ComunidadData;
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
-import es.golemdr.rrcc.webui.domain.Comunidad;
 import es.golemdr.rrcc.webui.domain.Usuario;
 import es.golemdr.rrcc.webui.domain.form.ComunidadForm;
 import es.golemdr.rrcc.webui.service.ComunidadesService;
@@ -38,7 +38,7 @@ public class ComunidadesController {
 	@GetMapping(value=UrlConstants.LISTADO_COMUNIDADES)
 	public String list(Map<String, Object> map, HttpServletRequest request){
 
-		List<Comunidad> comunidades = comunidadesService.recuperarComunidades();
+		List<ComunidadData> comunidades = comunidadesService.recuperarComunidades();
 		map.put("comunidades", comunidades);
 
 		return ForwardConstants.FWD_LISTADO_COMUNIDADES;
@@ -60,7 +60,7 @@ public class ComunidadesController {
 	public String insertar(@Valid ComunidadForm formulario, BindingResult result,  Model model, HttpServletRequest request) {
 		
 		String destino = null;
-		Comunidad entity = new Comunidad();
+		ComunidadData entity = new ComunidadData();
 		
 		
 		if(result.hasErrors()) {			
@@ -85,7 +85,7 @@ public class ComunidadesController {
 
 		ComunidadForm comunidadForm = new ComunidadForm();
 		
-		Comunidad comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
+		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
 
 		BeanUtils.copyProperties(comunidad, comunidadForm);
 		
@@ -111,7 +111,7 @@ public class ComunidadesController {
 			
 		}else {
 				
-			Comunidad comunidad  = new Comunidad();
+			ComunidadData comunidad  = new ComunidadData();
 			
 			BeanUtils.copyProperties(formulario, comunidad);
 			comunidad.setIdComunidad(Integer.valueOf(formulario.getIdComunidad()));
@@ -141,7 +141,7 @@ public class ComunidadesController {
 		List<Usuario> usuarios = usuariosService.recuperarUsuarios(idComunidad);
 		map.put("usuarios", usuarios);
 		
-		Comunidad comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
+		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
 		map.put("comunidad", comunidad);
 		
 		return ForwardConstants.FWD_LISTADO_USUARIOS;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import es.golemdr.rrcc.webui.domain.Comunidad;
+import es.golemdr.rrcc.common.dto.ComunidadData;
 import es.golemdr.rrcc.webui.service.BaseService;
 import es.golemdr.rrcc.webui.service.ComunidadesService;
 import reactor.core.publisher.Mono;
@@ -14,34 +14,34 @@ public class ComunidadesServiceImpl extends BaseService implements ComunidadesSe
 
 	private static final String COMUNIDADES_PATH = "/comunidades";
 	
-	public List<Comunidad> recuperarComunidades() {
+	public List<ComunidadData> recuperarComunidades() {
 		return webClient.get()
 				.uri(serverName + ":" + port + context + COMUNIDADES_PATH)
 				.retrieve()
-				.bodyToFlux(Comunidad.class)
+				.bodyToFlux(ComunidadData.class)
 				.collectList()
 				.block();
 	}
 
 	@Override
-	public Comunidad insertarComunidad(Comunidad comunidad) {
+	public ComunidadData insertarComunidad(ComunidadData comunidad) {
 		return webClient.post().uri(serverName + ":" + port + context + COMUNIDADES_PATH)
-				.body(Mono.just(comunidad), Comunidad.class).retrieve().bodyToMono(Comunidad.class).block();
+				.body(Mono.just(comunidad), ComunidadData.class).retrieve().bodyToMono(ComunidadData.class).block();
 	}
 
 	@Override
-	public Comunidad recuperarComunidadPorId(String id) {
+	public ComunidadData recuperarComunidadPorId(String id) {
 		return webClient.get()
 				.uri(serverName + ":" + port + context + COMUNIDADES_PATH + "/" + id)
 				.retrieve()
-				.bodyToMono(Comunidad.class)
+				.bodyToMono(ComunidadData.class)
 				.block();
 	}
 
 	@Override
-	public Comunidad actualizarComunidad(Comunidad comunidad) {
+	public ComunidadData actualizarComunidad(ComunidadData comunidad) {
 		return webClient.put().uri(serverName + ":" + port + context + COMUNIDADES_PATH)
-				.body(Mono.just(comunidad), Comunidad.class).retrieve().bodyToMono(Comunidad.class).block();
+				.body(Mono.just(comunidad), ComunidadData.class).retrieve().bodyToMono(ComunidadData.class).block();
 	}
 
 	@Override

@@ -2,19 +2,20 @@ package es.golemdr.rrcc.webui.service;
 
 import java.util.List;
 
-import es.golemdr.rrcc.webui.domain.Comunidad;
+import es.golemdr.rrcc.common.dto.ComunidadData;
+
 
 
 
 public interface ComunidadesService {
 
-	List<Comunidad> recuperarComunidades();
+	List<ComunidadData> recuperarComunidades();
 	
-	Comunidad recuperarComunidadPorId(String id);
+	ComunidadData recuperarComunidadPorId(String id);
 	
-	Comunidad actualizarComunidad(Comunidad comunidad);
+	ComunidadData actualizarComunidad(ComunidadData comunidad);
 	
-	Comunidad insertarComunidad(Comunidad comunidad);
+	ComunidadData insertarComunidad(ComunidadData comunidad);
 
 	void borrarComunidad(String id);
 	
