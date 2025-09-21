@@ -2,19 +2,19 @@ package es.golemdr.rrcc.webui.service;
 
 import java.util.List;
 
-import es.golemdr.rrcc.webui.domain.Recurso;
+import es.golemdr.rrcc.common.dto.RecursoData;
 
 
 
 public interface RecursosService {
 
-	List<Recurso> recuperarRecursos();
+	List<RecursoData> recuperarRecursos();
 	
-	Recurso recuperarRecursoPorId(String id);
+	RecursoData recuperarRecursoPorId(String id);
 	
-	Recurso actualizarRecurso(Recurso recurso);
+	RecursoData actualizarRecurso(RecursoData recurso);
 	
-	Recurso insertarRecurso(Recurso recurso);
+	RecursoData insertarRecurso(RecursoData recurso);
 
 	void borrarRecurso(String id);
 	

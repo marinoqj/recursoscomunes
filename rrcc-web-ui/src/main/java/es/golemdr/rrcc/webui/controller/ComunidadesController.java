@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.golemdr.rrcc.common.dto.ComunidadData;
+import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
-import es.golemdr.rrcc.webui.domain.Usuario;
 import es.golemdr.rrcc.webui.domain.form.ComunidadForm;
 import es.golemdr.rrcc.webui.service.ComunidadesService;
 import es.golemdr.rrcc.webui.service.UsuariosService;
@@ -138,7 +138,7 @@ public class ComunidadesController {
 	@PostMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD)
 	public String listUsuariosComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
 
-		List<Usuario> usuarios = usuariosService.recuperarUsuarios(idComunidad);
+		List<UsuarioData> usuarios = usuariosService.recuperarUsuarios(idComunidad);
 		map.put("usuarios", usuarios);
 		
 		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);

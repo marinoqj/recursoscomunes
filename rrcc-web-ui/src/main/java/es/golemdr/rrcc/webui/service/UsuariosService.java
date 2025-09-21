@@ -2,23 +2,24 @@ package es.golemdr.rrcc.webui.service;
 
 import java.util.List;
 
-import es.golemdr.rrcc.webui.domain.Usuario;
+import es.golemdr.rrcc.common.dto.UsuarioData;
+
 
 
 
 public interface UsuariosService {
 
-	List<Usuario> recuperarUsuarios();
+	List<UsuarioData> recuperarUsuarios();
 	
-	Usuario recuperarUsuarioPorId(String id);
+	UsuarioData recuperarUsuarioPorId(String id);
 	
-	Usuario actualizarUsuario(Usuario usuario);
+	UsuarioData actualizarUsuario(UsuarioData usuario);
 	
-	Usuario insertarUsuario(Usuario usuario);
+	UsuarioData insertarUsuario(UsuarioData usuario);
 
 	void borrarUsuario(String id);
 	
-	List<Usuario> recuperarUsuarios(String idComunidad);
+	List<UsuarioData> recuperarUsuarios(String idComunidad);
 	
 
 	

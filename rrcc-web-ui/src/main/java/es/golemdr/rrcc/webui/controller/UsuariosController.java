@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
-import es.golemdr.rrcc.webui.domain.Usuario;
 import es.golemdr.rrcc.webui.domain.form.UsuarioForm;
 import es.golemdr.rrcc.webui.ext.mapper.UsuarioMapper;
 import es.golemdr.rrcc.webui.service.UsuariosService;
@@ -34,7 +34,7 @@ public class UsuariosController {
 	@GetMapping(value=UrlConstants.LISTADO_USUARIOS)
 	public String list(Map<String, Object> map, HttpServletRequest request){
 
-		List<Usuario> usuarios = usuariosService.recuperarUsuarios();
+		List<UsuarioData> usuarios = usuariosService.recuperarUsuarios();
 		map.put("usuarios", usuarios);
 
 		return ForwardConstants.FWD_LISTADO_USUARIOS;
@@ -57,7 +57,7 @@ public class UsuariosController {
 	public String insertar(@Valid UsuarioForm formulario, BindingResult result,  Model model, HttpServletRequest request) {
 		
 		String destino = null;
-		Usuario usuario = new Usuario();
+		UsuarioData usuario = new UsuarioData();
 		
 		
 		if(result.hasErrors()) {			
@@ -83,7 +83,7 @@ public class UsuariosController {
 
 		UsuarioForm usuarioForm = new UsuarioForm();
 		
-		Usuario usuario = usuariosService.recuperarUsuarioPorId(idUsuario);
+		UsuarioData usuario = usuariosService.recuperarUsuarioPorId(idUsuario);
 
 		UsuarioMapper.copiarPropiedades(usuario, usuarioForm);
 		
@@ -109,7 +109,7 @@ public class UsuariosController {
 			
 		}else {
 				
-			Usuario usuario  = new Usuario();
+			UsuarioData usuario  = new UsuarioData();
 			
 			UsuarioMapper.copiarPropiedades(formulario, usuario);
 				

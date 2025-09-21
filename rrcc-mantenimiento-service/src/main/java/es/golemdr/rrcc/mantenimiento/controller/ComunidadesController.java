@@ -2,7 +2,6 @@ package es.golemdr.rrcc.mantenimiento.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +33,13 @@ public class ComunidadesController {
 
 	private static final Logger log = LoggerFactory.getLogger(ComunidadesController.class);
 
+	
 	private static final String ID_COMUNIDAD = "idComunidad";
 
 	private ComunidadesService comunidadesService;
 	
 	private ComunidadMapper comunidadMapper;
+	
 
 	public ComunidadesController(ComunidadesService comunidadesService, ComunidadMapper comunidadMapper) {
 		super();
@@ -60,8 +61,11 @@ public class ComunidadesController {
 	}
 
 	@GetMapping(value = UrlConstants.ID_COMUNIDAD_PATH)
-	public Optional<Comunidad> recuperarComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
-		return comunidadesService.recuperarComunidadPorId(idComunidad);
+	public ComunidadData recuperarComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
+		
+		Comunidad comunidad = comunidadesService.recuperarComunidadPorId(idComunidad).get(); // TODO - Habría que tratar el optional de alguna forma
+		
+		return comunidadMapper.toData(comunidad);
 	}
 
 	@GetMapping

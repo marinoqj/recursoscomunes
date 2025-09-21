@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.golemdr.rrcc.common.dto.RecursoData;
 import es.golemdr.rrcc.common.entity.Recurso;
+import es.golemdr.rrcc.common.mapper.RecursoMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.RecursoRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
@@ -34,15 +36,18 @@ public class RecursosController {
 	public static final String ID_RECURSO = "idRecurso";
 
 	private RecursosService recursosService;
+	
+	private RecursoMapper recursoMapper;
 
-	public RecursosController(RecursosService recursosService) {
+	public RecursosController(RecursosService recursosService, RecursoMapper recursoMapper) {
 		super();
 		this.recursosService = recursosService;
+		this.recursoMapper = recursoMapper;
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Recurso createRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
+	public RecursoData createRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
 
 		Recurso recurso = new Recurso();
 
@@ -52,12 +57,12 @@ public class RecursosController {
 	}
 
 	@GetMapping(value = UrlConstants.ID_RECURSO_PATH)
-	public Optional<Recurso> recuperarRecurso(@PathVariable(ID_RECURSO) @Min(1) int idRecurso) {
+	public RecursoData recuperarRecurso(@PathVariable(ID_RECURSO) @Min(1) int idRecurso) {
 		return recursosService.recuperarRecursoPorId(idRecurso);
 	}
 
 	@GetMapping
-	public List<Recurso> recuperarRecursos() {
+	public List<RecursoData> recuperarRecursos() {
 
 		List<Recurso> result = recursosService.recuperarRecursos();
 
@@ -66,7 +71,7 @@ public class RecursosController {
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Recurso updateRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
+	public RecursoData updateRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
 
 		final Recurso entity = recursosService.recuperarRecursoPorId(recursoRequest.idRecurso()).orElseThrow(
 				() -> new ResourceNotFoundException("Recurso " + recursoRequest.idRecurso() + " no encontrada"));
@@ -78,7 +83,7 @@ public class RecursosController {
 	
 
 	@DeleteMapping(value = UrlConstants.ID_RECURSO_PATH)
-	public List<Recurso> deleteRecurso(@PathVariable(ID_RECURSO) @Min(1) int idRecurso) {
+	public List<RecursoData> deleteRecurso(@PathVariable(ID_RECURSO) @Min(1) int idRecurso) {
 		
 		recursosService.borrarRecurso(idRecurso);
 		

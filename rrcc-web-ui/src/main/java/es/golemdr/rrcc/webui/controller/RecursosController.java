@@ -10,9 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import es.golemdr.rrcc.common.dto.RecursoData;
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
-import es.golemdr.rrcc.webui.domain.Recurso;
 import es.golemdr.rrcc.webui.domain.form.RecursoForm;
 import es.golemdr.rrcc.webui.service.RecursosService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class RecursosController {
 	@GetMapping(value=UrlConstants.LISTADO_RECURSOS)
 	public String list(Map<String, Object> map, HttpServletRequest request){
 
-		List<Recurso> recursos = recursosService.recuperarRecursos();
+		List<RecursoData> recursos = recursosService.recuperarRecursos();
 		map.put("recursos", recursos);
 
 		return ForwardConstants.FWD_LISTADO_RECURSOS;
@@ -54,7 +54,7 @@ public class RecursosController {
 	public String insertar(@Valid RecursoForm formulario, BindingResult result,  Model model, HttpServletRequest request) {
 		
 		String destino = null;
-		Recurso entity = new Recurso();
+		RecursoData entity = new RecursoData();
 		
 		
 		if(result.hasErrors()) {			
@@ -79,7 +79,7 @@ public class RecursosController {
 
 		RecursoForm recursoForm = new RecursoForm();
 		
-		Recurso recurso = recursosService.recuperarRecursoPorId(idRecurso);
+		RecursoData recurso = recursosService.recuperarRecursoPorId(idRecurso);
 
 		BeanUtils.copyProperties(recurso, recursoForm);
 		
@@ -104,7 +104,7 @@ public class RecursosController {
 			
 		}else {
 				
-			Recurso recurso  = new Recurso();
+			RecursoData recurso  = new RecursoData();
 			
 			BeanUtils.copyProperties(formulario, recurso);
 			recurso.setIdRecurso(Integer.valueOf(formulario.getIdRecurso()));

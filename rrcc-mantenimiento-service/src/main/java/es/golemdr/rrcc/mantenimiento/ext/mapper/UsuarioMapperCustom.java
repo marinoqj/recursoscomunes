@@ -5,7 +5,7 @@ import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 
 
-public class UsuarioMapper {
+public class UsuarioMapperCustom {
 	
 	public static void copiarPropiedades(UsuarioRequest origen, Usuario destino) {
 		
