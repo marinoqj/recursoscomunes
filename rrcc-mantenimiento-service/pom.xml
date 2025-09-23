@@ -22,12 +22,11 @@
     </properties>
 
 	<dependencies>
-<!-- Solucionar la forma de importar esta dependencia -->
-<!--		<dependency>-->
-<!--			<groupId>es.golemdr.rrcc</groupId>-->
-<!--			<artifactId>rrcc-common</artifactId>-->
-<!--			<version>1.0.0</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>es.golemdr.rrcc.common</groupId>
+			<artifactId>rrcc-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
         <!-- Spring Boot -->
         <dependency>

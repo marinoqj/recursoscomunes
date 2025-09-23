@@ -44,85 +44,39 @@
 	</dependencies>
     <build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>				
-				<executions>
-					<execution>
-						<id>copy-application-yml</id>
-						<phase>package</phase>
-						<configuration>
-							<target>
-								<delete
-									file="src/main/resources/application.yml" />
-								<copy
-									file="src/main/resources/${environment.yml}"
-									tofile="src/main/resources/application.yml" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>reset-application-properties</id>
-						<phase>verify</phase>
-						<configuration>
-							<target>
-								<delete
-									file="src/main/resources/application.yml" />
-								<copy
-									file="src/main/resources/application-local.yml"
-									tofile="src/main/resources/application.yml" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
-	            <version>3.10.1</version>
 	            <configuration>
 	                <source>17</source>
 	                <target>17</target>
+	                <version>3.10.0</version>
 	                <annotationProcessorPaths>
 	                    <path>
 	                        <groupId>org.mapstruct</groupId>
 	                        <artifactId>mapstruct-processor</artifactId>
 	                        <version>1.5.5.Final</version>
 	                    </path>
+			            <path>
+			              <groupId>org.projectlombok</groupId>
+			              <artifactId>lombok</artifactId>
+			              <version>1.18.30</version>
+			            </path>
 	                </annotationProcessorPaths>
 	            </configuration>
-	        </plugin>			
+	        </plugin>
+		    <plugin>
+		      <groupId>org.springframework.boot</groupId>
+		      <artifactId>spring-boot-maven-plugin</artifactId>
+		      <version>3.4.1</version>
+		      <executions>
+		        <execution>
+		          <id>repackage</id>
+		          <phase>none</phase>
+		        </execution>
+		      </executions>
+		    </plugin>	        			
 		</plugins>
 	</build>
-    <profiles>
-		<profile>
-			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>				
-				<environment.yml>application-local.yml</environment.yml>
-				<environment.name>LOCAL</environment.name>
-			</properties>
-		</profile>
-		<profile>
-			<id>desa</id>
-			<properties>
-				<environment.yml>application-desa.yml</environment.yml>
-				<environment.name>DESA</environment.name>
-			</properties>
-		</profile>
-		<profile>
-			<id>developer</id>
-			<properties>
-				<environment.yml>application-developer.yml</environment.yml>
-				<environment.name>DEVELOPER</environment.name>
-			</properties>
-		</profile>
-    </profiles>
+
 </project>
