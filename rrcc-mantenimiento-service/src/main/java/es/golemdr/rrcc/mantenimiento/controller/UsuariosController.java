@@ -1,11 +1,10 @@
 package es.golemdr.rrcc.mantenimiento.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
-import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.common.mapper.UsuarioMapper;
+import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
+import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.ext.mapper.UsuarioMapperCustom;
 import es.golemdr.rrcc.mantenimiento.service.UsuariosService;
@@ -62,13 +61,18 @@ public class UsuariosController {
 
 	@GetMapping(value = UrlConstants.ID_USUARIO_PATH)
 	public UsuarioData recuperarUsuario(@PathVariable(ID_USUARIO) @Min(1) int idUsuario) {
-		return usuariosService.recuperarUsuarioPorId(idUsuario);
+		
+		Usuario usuario = usuariosService.recuperarUsuarioPorId(idUsuario).get(); 
+		
+		return usuarioMapper.toData(usuario);
 	}
 
 	@GetMapping
 	public List<UsuarioData> recuperarUsuarios() {
 
-		List<Usuario> result = usuariosService.recuperarUsuarios();
+		List<UsuarioData> result = new ArrayList<UsuarioData>();
+		
+		usuariosService.recuperarUsuarios().stream().toList().forEach(u -> result.add(usuarioMapper.toData(u)));
 
 		return result;
 	}
@@ -77,13 +81,14 @@ public class UsuariosController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public UsuarioData updateUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
 
-		final Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioRequest.idUsuario()).orElseThrow(
+		Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioRequest.idUsuario()).orElseThrow(
 				() -> new ResourceNotFoundException("Usuario " + usuarioRequest.idUsuario() + " no encontrado"));
 
-		//BeanUtils.copyProperties(usuarioRequest, entity);
-		UsuarioMapper.copiarPropiedades(usuarioRequest, entity);
+		UsuarioMapperCustom.copiarPropiedades(usuarioRequest, entity);
 
-		return usuariosService.insertarActualizar(entity);
+		entity = usuariosService.insertarActualizar(entity); 
+		
+		return usuarioMapper.toData(entity);
 	}
 
 	@DeleteMapping(value = UrlConstants.ID_USUARIO_PATH)
@@ -96,8 +101,10 @@ public class UsuariosController {
 	
 	@GetMapping(value = UrlConstants.LISTADO_USUARIOS_COMUNIDAD_PATH)
 	public List<UsuarioData> recuperarUsuariosPorComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
+		
+		List<UsuarioData> result = new ArrayList<UsuarioData>();
 
-		List<Usuario> result = usuariosService.recuperarUsuariosPorComunidad(idComunidad);
+		usuariosService.recuperarUsuariosPorComunidad(idComunidad).stream().toList().forEach(u -> result.add(usuarioMapper.toData(u)));
 
 		return result;
 	}

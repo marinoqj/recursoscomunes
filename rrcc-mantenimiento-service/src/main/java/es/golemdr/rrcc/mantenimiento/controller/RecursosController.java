@@ -1,5 +1,6 @@
 package es.golemdr.rrcc.mantenimiento.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ import es.golemdr.rrcc.common.mapper.RecursoMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
 import es.golemdr.rrcc.mantenimiento.controller.request.RecursoRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
+import es.golemdr.rrcc.mantenimiento.ext.mapper.RecursoMapperCustom;
 import es.golemdr.rrcc.mantenimiento.service.RecursosService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -51,20 +53,27 @@ public class RecursosController {
 
 		Recurso recurso = new Recurso();
 
-		BeanUtils.copyProperties(recursoRequest, recurso);
+		RecursoMapperCustom.copiarPropiedades(recursoRequest, recurso);
 
-		return recursosService.insertarActualizar(recurso);
+		recurso = recursosService.insertarActualizar(recurso); 
+		
+		return recursoMapper.toData(recurso);
 	}
 
 	@GetMapping(value = UrlConstants.ID_RECURSO_PATH)
 	public RecursoData recuperarRecurso(@PathVariable(ID_RECURSO) @Min(1) int idRecurso) {
-		return recursosService.recuperarRecursoPorId(idRecurso);
+		
+		Recurso recurso = recursosService.recuperarRecursoPorId(idRecurso).get(); 
+		
+		return recursoMapper.toData(recurso);
 	}
 
 	@GetMapping
 	public List<RecursoData> recuperarRecursos() {
+		
+		List<RecursoData> result = new ArrayList<RecursoData>();
 
-		List<Recurso> result = recursosService.recuperarRecursos();
+		recursosService.recuperarRecursos().stream().toList().forEach(r -> result.add(recursoMapper.toData(r)));
 
 		return result;
 	}
@@ -73,12 +82,15 @@ public class RecursosController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public RecursoData updateRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
 
-		final Recurso entity = recursosService.recuperarRecursoPorId(recursoRequest.idRecurso()).orElseThrow(
+		Recurso entity = recursosService.recuperarRecursoPorId(recursoRequest.idRecurso()).orElseThrow(
 				() -> new ResourceNotFoundException("Recurso " + recursoRequest.idRecurso() + " no encontrada"));
 
-		BeanUtils.copyProperties(recursoRequest, entity);
+		RecursoMapperCustom.copiarPropiedades(recursoRequest, entity);
 
-		return recursosService.insertarActualizar(entity);
+		entity = recursosService.insertarActualizar(entity); 
+
+
+		return recursoMapper.toData(entity);
 	}
 	
 
