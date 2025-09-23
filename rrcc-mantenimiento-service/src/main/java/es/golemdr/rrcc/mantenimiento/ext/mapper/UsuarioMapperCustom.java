@@ -1,22 +1,24 @@
 package es.golemdr.rrcc.mantenimiento.ext.mapper;
 
+import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Comunidad;
 import es.golemdr.rrcc.common.entity.Usuario;
-import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 
 
 public class UsuarioMapperCustom {
 	
-	public static void copiarPropiedades(UsuarioRequest origen, Usuario destino) {
+	public static void copiarPropiedades(UsuarioData origen, Usuario destino, String tipo) {
 		
-		destino.setIdUsuario(origen.idUsuario());
-		destino.setIdentificador(origen.identificador());
+		destino.setIdUsuario(origen.getIdUsuario());
+		destino.setIdentificador(origen.getIdentificador());
 		
-		Comunidad comunidad = new Comunidad();
-		comunidad.setIdComunidad(origen.idComunidad());
-		
-		destino.setComunidad(comunidad);
-		
+		if(tipo.equals("INSERT")) {
+
+			Comunidad comunidad = new Comunidad();
+			comunidad.setIdComunidad(origen.getComunidad().getIdComunidad());
+			
+			destino.setComunidad(comunidad);
+		}
 		
 	}
 

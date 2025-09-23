@@ -21,7 +21,6 @@ import es.golemdr.rrcc.common.dto.ComunidadData;
 import es.golemdr.rrcc.common.entity.Comunidad;
 import es.golemdr.rrcc.common.mapper.ComunidadMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
-import es.golemdr.rrcc.mantenimiento.controller.request.ComunidadRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.service.ComunidadesService;
 import jakarta.validation.Valid;
@@ -49,11 +48,11 @@ public class ComunidadesController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ComunidadData createComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
+	public ComunidadData createComunidad(@Valid @RequestBody ComunidadData comunidadData) {
 
 		Comunidad comunidad = new Comunidad();
 
-		BeanUtils.copyProperties(comunidadRequest, comunidad);
+		BeanUtils.copyProperties(comunidadData, comunidad);
 		
 		comunidad = comunidadesService.insertarActualizar(comunidad);
 		
@@ -80,12 +79,12 @@ public class ComunidadesController {
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ComunidadData updateComunidad(@Valid @RequestBody ComunidadRequest comunidadRequest) {
+	public ComunidadData updateComunidad(@Valid @RequestBody ComunidadData comunidadData) {
 
-		Comunidad entity = comunidadesService.recuperarComunidadPorId(comunidadRequest.idComunidad()).orElseThrow(
-				() -> new ResourceNotFoundException("Comunidad " + comunidadRequest.idComunidad() + " no encontrada"));
+		Comunidad entity = comunidadesService.recuperarComunidadPorId(comunidadData.getIdComunidad()).orElseThrow(
+				() -> new ResourceNotFoundException("Comunidad " + comunidadData.getIdComunidad() + " no encontrada"));
 
-		BeanUtils.copyProperties(comunidadRequest, entity);
+		BeanUtils.copyProperties(comunidadData, entity);
 
 		entity = comunidadesService.insertarActualizar(entity); 
 		

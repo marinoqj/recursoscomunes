@@ -13,7 +13,7 @@ public class UsuarioMapper {
 		
 		ComunidadData comunidad = new ComunidadData();
 		comunidad.setIdComunidad(Integer.valueOf(origen.getIdComunidad()));
-		destino.setComunidad(comunidad);;
+		destino.setComunidad(comunidad);
 		
 		
 	}

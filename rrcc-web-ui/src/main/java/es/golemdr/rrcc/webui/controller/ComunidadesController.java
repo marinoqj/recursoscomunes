@@ -26,13 +26,10 @@ public class ComunidadesController {
 	
 	private ComunidadesService comunidadesService;
 	
-	private UsuariosService usuariosService;
-	
 
 	public ComunidadesController(ComunidadesService comunidadesService, UsuariosService usuariosService) {
 		super();
 		this.comunidadesService = comunidadesService;
-		this.usuariosService = usuariosService;
 	}
 
 	@GetMapping(value=UrlConstants.LISTADO_COMUNIDADES)
@@ -135,21 +132,4 @@ public class ComunidadesController {
 		return list(model.asMap(), request);
 	}
 	
-	@PostMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD)
-	public String listUsuariosComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
-
-		List<UsuarioData> usuarios = usuariosService.recuperarUsuarios(idComunidad);
-		map.put("usuarios", usuarios);
-		
-		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
-		map.put("comunidad", comunidad);
-		
-		return ForwardConstants.FWD_LISTADO_USUARIOS;
-	}
-	
-	@GetMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD_GET)
-	public String redListUsuariosComunidad(@PathVariable String idComunidad, Map<String, Object> map, HttpServletRequest request){
-
-		return listUsuariosComunidad(idComunidad, map, request);
-	}
 }

@@ -20,7 +20,6 @@ import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.common.mapper.UsuarioMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
-import es.golemdr.rrcc.mantenimiento.controller.request.UsuarioRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.ext.mapper.UsuarioMapperCustom;
 import es.golemdr.rrcc.mantenimiento.service.UsuariosService;
@@ -48,11 +47,11 @@ public class UsuariosController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UsuarioData createUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
+	public UsuarioData createUsuario(@Valid @RequestBody UsuarioData usuarioData) {
 
 		Usuario usuario = new Usuario();
 
-		UsuarioMapperCustom.copiarPropiedades(usuarioRequest, usuario);
+		UsuarioMapperCustom.copiarPropiedades(usuarioData, usuario, "INSERT");
 
 		usuario = usuariosService.insertarActualizar(usuario);
 		
@@ -79,12 +78,12 @@ public class UsuariosController {
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public UsuarioData updateUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
+	public UsuarioData updateUsuario(@Valid @RequestBody UsuarioData usuarioData) {
 
-		Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioRequest.idUsuario()).orElseThrow(
-				() -> new ResourceNotFoundException("Usuario " + usuarioRequest.idUsuario() + " no encontrado"));
+		Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioData.getIdUsuario()).orElseThrow(
+				() -> new ResourceNotFoundException("Usuario " + usuarioData.getIdUsuario() + " no encontrado"));
 
-		UsuarioMapperCustom.copiarPropiedades(usuarioRequest, entity);
+		UsuarioMapperCustom.copiarPropiedades(usuarioData, entity, "UPDATE");
 
 		entity = usuariosService.insertarActualizar(entity); 
 		

@@ -22,7 +22,6 @@ import es.golemdr.rrcc.common.dto.RecursoData;
 import es.golemdr.rrcc.common.entity.Recurso;
 import es.golemdr.rrcc.common.mapper.RecursoMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
-import es.golemdr.rrcc.mantenimiento.controller.request.RecursoRequest;
 import es.golemdr.rrcc.mantenimiento.ext.exceptions.ResourceNotFoundException;
 import es.golemdr.rrcc.mantenimiento.ext.mapper.RecursoMapperCustom;
 import es.golemdr.rrcc.mantenimiento.service.RecursosService;
@@ -49,11 +48,11 @@ public class RecursosController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public RecursoData createRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
+	public RecursoData createRecurso(@Valid @RequestBody RecursoData recursoData) {
 
 		Recurso recurso = new Recurso();
 
-		RecursoMapperCustom.copiarPropiedades(recursoRequest, recurso);
+		RecursoMapperCustom.copiarPropiedades(recursoData, recurso, "INSERT");
 
 		recurso = recursosService.insertarActualizar(recurso); 
 		
@@ -80,12 +79,12 @@ public class RecursosController {
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public RecursoData updateRecurso(@Valid @RequestBody RecursoRequest recursoRequest) {
+	public RecursoData updateRecurso(@Valid @RequestBody RecursoData recursoData) {
 
-		Recurso entity = recursosService.recuperarRecursoPorId(recursoRequest.idRecurso()).orElseThrow(
-				() -> new ResourceNotFoundException("Recurso " + recursoRequest.idRecurso() + " no encontrada"));
+		Recurso entity = recursosService.recuperarRecursoPorId(recursoData.getIdRecurso()).orElseThrow(
+				() -> new ResourceNotFoundException("Recurso " + recursoData.getIdRecurso() + " no encontrada"));
 
-		RecursoMapperCustom.copiarPropiedades(recursoRequest, entity);
+		RecursoMapperCustom.copiarPropiedades(recursoData, entity, "UPDATE");
 
 		entity = recursosService.insertarActualizar(entity); 
 

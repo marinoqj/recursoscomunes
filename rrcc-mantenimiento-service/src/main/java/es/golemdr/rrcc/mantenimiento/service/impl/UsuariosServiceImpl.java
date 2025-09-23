@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.golemdr.rrcc.common.entity.Comunidad;
 import es.golemdr.rrcc.common.entity.Usuario;
