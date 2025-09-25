@@ -6,7 +6,6 @@ import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Usuario;
 
 @Mapper(componentModel = "spring", uses = { ComunidadMapper.class })
-
 public interface UsuarioMapper {
 	
     UsuarioData toData(Usuario entity);

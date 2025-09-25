@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: reservas-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+
+
+#logging:
+#  level:
+#    org.springframework.cloud: DEBUG
