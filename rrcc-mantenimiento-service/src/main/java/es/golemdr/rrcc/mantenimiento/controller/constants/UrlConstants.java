@@ -11,5 +11,6 @@ public class UrlConstants {
 	
 	public static final String URL_RECURSOS = "/recursos";
 	public static final String ID_RECURSO_PATH = "/{idRecurso}";
+	public static final String LISTADO_RECURSOS_COMUNIDAD_PATH = "/comunidad/{idComunidad}";
 
 }

@@ -4,7 +4,7 @@ import es.golemdr.rrcc.common.dto.ComunidadData;
 import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.webui.domain.form.UsuarioForm;
 
-public class UsuarioMapper {
+public class UsuarioMapperUI {
 	
 	public static void copiarPropiedades(UsuarioForm origen, UsuarioData destino) {
 		

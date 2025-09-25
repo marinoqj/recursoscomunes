@@ -15,16 +15,6 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 	private static final String USUARIOS_PATH = "/usuarios";
 	
 	@Override
-	public List<UsuarioData> recuperarUsuarios() {
-		return webClient.get()
-				.uri(serverName + ":" + port + context + USUARIOS_PATH)
-				.retrieve()
-				.bodyToFlux(UsuarioData.class)
-				.collectList()
-				.block();
-	}
-
-	@Override
 	public UsuarioData insertarUsuario(UsuarioData usuario) {
 		return webClient.post().uri(serverName + ":" + port + context + USUARIOS_PATH)
 				.body(Mono.just(usuario), UsuarioData.class).retrieve().bodyToMono(UsuarioData.class).block();

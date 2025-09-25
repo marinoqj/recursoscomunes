@@ -8,5 +8,6 @@ public class RecursoForm {
 
     private String idRecurso;
     private String tipoRecurso;
+    private String idComunidad;
 
 }

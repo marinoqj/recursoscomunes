@@ -25,6 +25,7 @@
 <form name="formulario" method="post">
 <!-- 	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
 	<input type="hidden" name="idRecurso"/>
+	<input type="hidden" name="idComunidad" th:value="${comunidad.idComunidad}"/>
 </form>
 
 <br>
@@ -32,7 +33,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-				<h4 class="texto-azul"><i class="fas fa-users"></i>&nbsp;&nbsp;Listado de recursos</h4>
+				<h4 class="texto-azul"><i class="fas fa-users"></i>&nbsp;&nbsp;Listado de recursos de <span th:text="${comunidad.nombre}"></span></h4>
 	</div>
 </div>
 <hr class="texto-azul">
@@ -61,9 +62,9 @@
 		<table class="table table-hover table-striped table-sm">
 			<caption>Listado de recursos</caption>
 			<thead class="table-light">
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Tipo de recurso</th>			
+				<tr>					
+					<th scope="col">Tipo de recurso</th>
+					<th scope="col">Descripción</th>			
 					<th width="10%">&nbsp;</th>
 			</thead>
 			<tbody>
@@ -74,8 +75,8 @@
 						<td>APELLIDO1</td>
 						<td>APELLIDO2</td>
 						-->				
-						<td th:text="${recurso.idRecurso}" />
 						<td th:text="${recurso.tipoRecurso}" />
+						<td th:text="${recurso.descripcionTipoRecurso}" />
 <!-- 						<td th:text="${recurso.apellido1}" /> -->
 <!-- 						<td th:text="${recurso.apellido2}" /> -->
 <!-- 						<td th:text="${recurso.habilitacion}" />						  -->
@@ -118,7 +119,7 @@
 <div class="row">
 	<div class="col-md-10">&nbsp;</div>
 	<div class="col-md-2 text-end">
-			<a th:href="@{/verAltaRecurso}" class="btn btn-primary btn-sm">Nuevo recurso</a>
+			<a th:href="@{'/verAltaRecurso' + ${comunidad.idComunidad}}" class="btn btn-primary btn-sm">Nuevo recurso</a>
 	</div>
 </div>
 

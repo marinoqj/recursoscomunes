@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import es.golemdr.rrcc.common.entity.Recurso;
+import es.golemdr.rrcc.common.entity.Usuario;
 
 
 public interface RecursosService {
@@ -16,6 +17,6 @@ public interface RecursosService {
 
     void borrarRecurso(int idRecurso);
     
-    
+    List<Recurso> recuperarRecursosPorComunidad(int idComunidad);
     
 }

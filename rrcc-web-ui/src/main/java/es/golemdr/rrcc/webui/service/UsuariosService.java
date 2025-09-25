@@ -9,8 +9,6 @@ import es.golemdr.rrcc.common.dto.UsuarioData;
 
 public interface UsuariosService {
 
-	List<UsuarioData> recuperarUsuarios();
-	
 	UsuarioData recuperarUsuarioPorId(String id);
 	
 	UsuarioData actualizarUsuario(UsuarioData usuario);

@@ -8,7 +8,7 @@ import es.golemdr.rrcc.common.dto.RecursoData;
 
 public interface RecursosService {
 
-	List<RecursoData> recuperarRecursos();
+	List<RecursoData> recuperarRecursos(String idComunidad);
 	
 	RecursoData recuperarRecursoPorId(String id);
 	

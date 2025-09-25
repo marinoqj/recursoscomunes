@@ -64,7 +64,7 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Identificador</th>			
-					<th width="10%">&nbsp;</th>
+					<th width="20%">&nbsp;</th>
 			</thead>
 			<tbody>
 				<tr th:each="comunidad : ${comunidades}">
@@ -80,7 +80,9 @@
 <!-- 						<td th:text="${comunidad.apellido2}" /> -->
 <!-- 						<td th:text="${comunidad.habilitacion}" />						  -->
 				        <td>
-					      	<a href="#" th:onclick="javascript:listadoUsuariosComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-building fa-lg" data-toggle="tooltip" title="Ver usuarios"></i></a>
+					      	<a href="#" th:onclick="javascript:listadoUsuariosComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-users fa-lg" data-toggle="tooltip" title="Ver usuarios"></i></a>
+					      	&nbsp;&nbsp;&nbsp;&nbsp;					        
+					      	<a href="#" th:onclick="javascript:listadoRecursosComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-building fa-lg" data-toggle="tooltip" title="Ver recursos"></i></a>
 					      	&nbsp;&nbsp;&nbsp;&nbsp;					        
 					      	<a href="#" th:onclick="javascript:editarComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-user-edit fa-lg" data-toggle="tooltip" title="Editar"></i></a>
 					      	&nbsp;&nbsp;&nbsp;&nbsp;			      	
@@ -169,6 +171,13 @@ function listadoUsuariosComunidad(idComunidad){
 	
 	document.formulario.idComunidad.value = idComunidad;	
 	document.formulario.action="listadoUsuariosComunidad";
+	document.formulario.submit();
+}
+
+function listadoRecursosComunidad(idComunidad){
+	
+	document.formulario.idComunidad.value = idComunidad;	
+	document.formulario.action="listadoRecursosComunidad";
 	document.formulario.submit();
 }
 

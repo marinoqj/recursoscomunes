@@ -3,7 +3,6 @@ package es.golemdr.rrcc.webui.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +15,7 @@ import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.webui.controller.constantes.ForwardConstants;
 import es.golemdr.rrcc.webui.controller.constantes.UrlConstants;
 import es.golemdr.rrcc.webui.domain.form.UsuarioForm;
-import es.golemdr.rrcc.webui.ext.mapper.UsuarioMapper;
+import es.golemdr.rrcc.webui.ext.mapper.UsuarioMapperUI;
 import es.golemdr.rrcc.webui.service.ComunidadesService;
 import es.golemdr.rrcc.webui.service.UsuariosService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -82,11 +81,9 @@ public class UsuariosController {
 			
 		}else {
 			
-			UsuarioMapper.copiarPropiedades(formulario, usuario);
+			UsuarioMapperUI.copiarPropiedades(formulario, usuario);
 			usuariosService.insertarUsuario(usuario);
 
-			// No se puede utilizar un Forward y concatenarle la comunidad. Hay que construir aquí el destino
-			//destino = "redirect:listadoUsuariosComunidad" + formulario.getIdComunidad();
 			destino = listUsuariosComunidad(formulario.getIdComunidad(), model.asMap(), request);
 		}
 				
@@ -101,7 +98,7 @@ public class UsuariosController {
 		
 		UsuarioData usuario = usuariosService.recuperarUsuarioPorId(idUsuario);
 
-		UsuarioMapper.copiarPropiedades(usuario, usuarioForm);
+		UsuarioMapperUI.copiarPropiedades(usuario, usuarioForm);
 		
 		usuarioForm.setIdUsuario(usuario.getIdUsuario().toString());
 		
@@ -127,7 +124,7 @@ public class UsuariosController {
 				
 			UsuarioData usuario  = new UsuarioData();
 			
-			UsuarioMapper.copiarPropiedades(formulario, usuario);
+			UsuarioMapperUI.copiarPropiedades(formulario, usuario);
 				
 			usuariosService.actualizarUsuario(usuario);
 			

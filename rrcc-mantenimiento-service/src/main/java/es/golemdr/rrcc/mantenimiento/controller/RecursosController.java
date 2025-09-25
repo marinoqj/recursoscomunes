@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.common.dto.RecursoData;
+import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Recurso;
 import es.golemdr.rrcc.common.mapper.RecursoMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
@@ -35,6 +36,7 @@ public class RecursosController {
 	private static final Logger log = LoggerFactory.getLogger(RecursosController.class);
 
 	public static final String ID_RECURSO = "idRecurso";
+	public static final String ID_COMUNIDAD = "idComunidad";
 
 	private RecursosService recursosService;
 	
@@ -99,6 +101,16 @@ public class RecursosController {
 		recursosService.borrarRecurso(idRecurso);
 		
 		return recuperarRecursos();
+	}
+	
+	@GetMapping(value = UrlConstants.LISTADO_RECURSOS_COMUNIDAD_PATH)
+	public List<RecursoData> recuperarRecursosPorComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
+		
+		List<RecursoData> result = new ArrayList<RecursoData>();
+
+		recursosService.recuperarRecursosPorComunidad(idComunidad).stream().toList().forEach(u -> result.add(recursoMapper.toData(u)));
+
+		return result;
 	}
 
 }
