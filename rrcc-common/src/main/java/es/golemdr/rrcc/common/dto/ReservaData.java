@@ -6,7 +6,6 @@ import java.sql.Time;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import es.golemdr.rrcc.common.entity.ReservaId;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +13,13 @@ import lombok.Setter;
 @Getter @Setter
 public class ReservaData {
 	
-	private ReservaId idReserva;
+	private Integer idReserva;
 	private Date fecha;
 	private Time horaInicio;	
 	private Time horaFin;
+	// No mapeo el usuario completo para evitar la duplicidad de la comunidad con la del recurso
+	private Integer idUsuario;
+	private RecursoData recurso;
+	
 
 }

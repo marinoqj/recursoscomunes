@@ -71,7 +71,7 @@
 			<tbody>
 				<tr th:each="reserva : ${reservas}">						
 						<td th:text="${#dates.format(reserva.fecha, 'dd/MM/yyyy')}" />
-						<td th:text="${reserva.idReserva.idRecurso}" />
+						<td th:text="${reserva.recurso.descripcionTipoRecurso}" />
 						<td th:text="${#dates.format(reserva.horaInicio, 'HH:mm')}" />
 						<td th:text="${#dates.format(reserva.horaFin, 'HH:mm')}" />
 				        <td>&nbsp;</td> 																							

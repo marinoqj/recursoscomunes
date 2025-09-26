@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class ReservaForm {
 
+	private String idReserva;
     private String idUsuario;
     private String idRecurso;
     private String fecha;

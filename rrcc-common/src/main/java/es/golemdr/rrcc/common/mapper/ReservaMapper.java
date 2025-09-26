@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import es.golemdr.rrcc.common.dto.ReservaData;
 import es.golemdr.rrcc.common.entity.Reserva;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { RecursoMapper.class })
 public interface ReservaMapper {
 
 	ReservaData toData(Reserva reserva);
