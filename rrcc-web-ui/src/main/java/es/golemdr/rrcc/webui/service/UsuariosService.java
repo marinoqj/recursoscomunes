@@ -17,7 +17,7 @@ public interface UsuariosService {
 
 	void borrarUsuario(String id);
 	
-	List<UsuarioData> recuperarUsuarios(String idComunidad);
+	List<UsuarioData> recuperarUsuariosPorComunidad(String idComunidad);
 	
 
 	

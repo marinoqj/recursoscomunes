@@ -46,7 +46,7 @@ public class UsuariosServiceImpl extends BaseService implements UsuariosService 
 	}
 	
 	@Override
-	public List<UsuarioData> recuperarUsuarios(String idComunidad) {
+	public List<UsuarioData> recuperarUsuariosPorComunidad(String idComunidad) {
 		return webClient.get()
 				.uri(serverName + ":" + port + context + USUARIOS_PATH + "/comunidad/" + idComunidad)
 				.retrieve()

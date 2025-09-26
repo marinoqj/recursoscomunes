@@ -47,7 +47,7 @@ public class RecursosServiceImpl extends BaseService implements RecursosService 
 	}
 
 	@Override
-	public List<RecursoData> recuperarRecursos(String idComunidad) {
+	public List<RecursoData> recuperarRecursosPorComunidad(String idComunidad) {
 		return webClient.get()
 				.uri(serverName + ":" + port + context + RECURSOS_PATH + "/comunidad/" + idComunidad)
 				.retrieve()

@@ -29,5 +29,10 @@ public class UrlConstants {
 	public static final String EDITAR_RECURSO = "/editarRecurso";
 	public static final String ACTUALIZAR_RECURSO = "/actualizarRecurso";	
 	public static final String BORRAR_RECURSO = "/borrarRecurso";
+	
+	// Reservas
+	public static final String LISTADO_RESERVAS_USUARIO = "/listadoReservasUsuario";
+	public static final String VER_NUEVA_RESERVA = "/verNuevaReserva{idUsuario}";
+	public static final String INSERTAR_RESERVA = "/insertarReserva";
 
 }

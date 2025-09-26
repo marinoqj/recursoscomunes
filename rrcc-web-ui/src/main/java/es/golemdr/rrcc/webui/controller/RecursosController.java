@@ -41,7 +41,7 @@ public class RecursosController {
 	@PostMapping(value=UrlConstants.LISTADO_RECURSOS_COMUNIDAD)
 	public String listRecursosComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
 
-		List<RecursoData> recursos = recursosService.recuperarRecursos(idComunidad);
+		List<RecursoData> recursos = recursosService.recuperarRecursosPorComunidad(idComunidad);
 		map.put("recursos", recursos);
 		
 		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);

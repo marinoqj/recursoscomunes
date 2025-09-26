@@ -37,4 +37,10 @@ public class ReservasServiceImpl implements ReservasService {
 		
 	}
 
+	@Override
+	public Reserva insertarActualizar(Reserva reserva) {
+
+		return reservasRepository.save(reserva);
+	}
+
 }

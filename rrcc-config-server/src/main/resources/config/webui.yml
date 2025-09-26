@@ -7,10 +7,16 @@ server:
   servlet:
     context-path: /rrcc
 
+
+# Esto tiene que ir por el api-gateway
 api:
   server:
     name: http://localhost
     context: /
     port: 8091   	
 
-  
+api2:
+  server:
+    name: http://localhost
+    context: /
+    port: 8092   

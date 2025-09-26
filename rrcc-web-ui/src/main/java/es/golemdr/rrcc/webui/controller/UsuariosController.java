@@ -39,7 +39,7 @@ public class UsuariosController {
 	@PostMapping(value=UrlConstants.LISTADO_USUARIOS_COMUNIDAD)
 	public String listUsuariosComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
 
-		List<UsuarioData> usuarios = usuariosService.recuperarUsuarios(idComunidad);
+		List<UsuarioData> usuarios = usuariosService.recuperarUsuariosPorComunidad(idComunidad);
 		map.put("usuarios", usuarios);
 		
 		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
