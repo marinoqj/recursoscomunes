@@ -78,7 +78,7 @@ public class ComunidadesController {
 	}
 
 	@PutMapping
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public ComunidadData updateComunidad(@Valid @RequestBody ComunidadData comunidadData) {
 
 		Comunidad entity = comunidadesService.recuperarComunidadPorId(comunidadData.getIdComunidad()).orElseThrow(
@@ -92,6 +92,7 @@ public class ComunidadesController {
 	}
 
 	@DeleteMapping(value = UrlConstants.ID_COMUNIDAD_PATH)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public List<ComunidadData> deleteComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
 		
 		comunidadesService.borrarComunidad(idComunidad);

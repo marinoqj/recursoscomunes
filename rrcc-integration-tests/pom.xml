@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		
+	<groupId>es.golemdr.rrcc.integracion</groupId>
+	<artifactId>rrcc-tests-integracion</artifactId>
+	<packaging>jar</packaging>
+	<name>rrcc-common</name>
+	<description>Modulo para los tests de integracion</description>
+	<version>1.0.0</version>
+
+    <parent>
+        <groupId>es.golemdr.rrcc</groupId>
+        <artifactId>recursos-comunes</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>17</java-version>				
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>es.golemdr.rrcc.common</groupId>
+			<artifactId>rrcc-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		
+<!--		<dependency>-->
+<!--		  <groupId>org.junit.jupiter</groupId>-->
+<!--		  <artifactId>junit-jupiter</artifactId>-->
+<!--		  <version>5.10.0</version>-->
+<!--		  <scope>test</scope>-->
+<!--		</dependency>-->
+		<dependency>
+		  <groupId>io.rest-assured</groupId>
+		  <artifactId>rest-assured</artifactId>
+		  <scope>test</scope>
+		</dependency>
+<!--		<dependency>-->
+<!--		  <groupId>org.testcontainers</groupId>-->
+<!--		  <artifactId>junit-jupiter</artifactId>-->
+<!--		  <version>1.20.0</version>-->
+<!--		  <scope>test</scope>-->
+<!--		</dependency>		-->
+	</dependencies>
+	
+	<build>
+    <plugins>
+      <!-- Surefire for unit/integration test runs -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

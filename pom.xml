@@ -22,6 +22,7 @@
         <module>rrcc-mantenimiento-service</module>
         <module>rrcc-reservas-service</module>
         <module>rrcc-web-ui</module>
+        <module>rrcc-tests-integracion</module>
     </modules>
 
     <properties>
