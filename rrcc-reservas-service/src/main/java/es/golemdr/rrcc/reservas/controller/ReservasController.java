@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.common.dto.ReservaData;
 import es.golemdr.rrcc.common.entity.Reserva;
+import es.golemdr.rrcc.common.mapper.ReservaCustomMapper;
 import es.golemdr.rrcc.common.mapper.ReservaMapper;
 import es.golemdr.rrcc.reservas.controller.constants.UrlConstants;
 import es.golemdr.rrcc.reservas.service.ReservasService;
@@ -27,12 +28,12 @@ public class ReservasController {
 	
 	private ReservasService reservasService;
 	
-	private ReservaMapper reservaMapper;
+	private ReservaCustomMapper reservaCustomMapper;
 	
-	public ReservasController(ReservasService reservasService, ReservaMapper reservaMapper) {
+	public ReservasController(ReservasService reservasService, ReservaCustomMapper reservaCustomMapper) {
 		super();
 		this.reservasService = reservasService;
-		this.reservaMapper = reservaMapper;
+		this.reservaCustomMapper = reservaCustomMapper;
 	}
 
 	public static final String ID_USUARIO = "idUsuario";
@@ -42,7 +43,7 @@ public class ReservasController {
 		
 		List<ReservaData> result = new ArrayList<ReservaData>();
 		
-		reservasService.recuperarReservasPorUsuario(idUsuario).stream().toList().forEach(r -> result.add(reservaMapper.toData(r)));
+		reservasService.recuperarReservasPorUsuario(idUsuario).stream().toList().forEach(r -> result.add(reservaCustomMapper.toData(r)));
 
 		return result;
 	}
@@ -51,11 +52,11 @@ public class ReservasController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ReservaData createReserva(@Valid @RequestBody ReservaData reservaData) {
 
-		Reserva reserva = reservaMapper.toEntity(reservaData);
+		Reserva reserva = reservaCustomMapper.toEntity(reservaData);
 
 		reserva = reservasService.insertarActualizar(reserva);
 		
-		return reservaMapper.toData(reserva);
+		return reservaCustomMapper.toData(reserva);
 	}
 	
 }

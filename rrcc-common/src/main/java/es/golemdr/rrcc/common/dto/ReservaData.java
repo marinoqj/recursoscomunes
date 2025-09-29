@@ -17,7 +17,7 @@ public class ReservaData {
 	private Date fecha;
 	private Time horaInicio;	
 	private Time horaFin;
-	// No mapeo el usuario completo para evitar la duplicidad de la comunidad con la del recurso
+	// No mapeo el usuario completo para evitar la duplicidad de la comunidad con la del recurso (que genera problemas en JSON)
 	private Integer idUsuario;
 	private RecursoData recurso;
 	

@@ -17,13 +17,13 @@ public class ReservaMapperUI {
 		destino.setIdReserva(origen.getIdReserva() != null ? Integer.valueOf(origen.getIdReserva()) : null);
 		destino.setFecha(DateUtils.convertirString2DateSQL(origen.getFecha(), Constantes.FECHA_YYYY_MM_DD));
 		destino.setHoraInicio(Time.valueOf(origen.getHoraInicio()));
-		destino.setHoraFin(Time.valueOf(origen.getHoraFin()));
-		
-		UsuarioData usuario = new UsuarioData();
-		usuario.setIdUsuario(Integer.valueOf(origen.getIdUsuario()));
+		destino.setHoraFin(Time.valueOf(origen.getHoraFin()));		
+		destino.setIdUsuario(Integer.valueOf(origen.getIdUsuario()));
 		
 		RecursoData recurso = new RecursoData();
 		recurso.setIdRecurso(Integer.valueOf(origen.getIdRecurso()));
+		
+		destino.setRecurso(recurso);
 		
 	}
 	
