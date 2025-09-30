@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.common.dto.ReservaData;
+import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Reserva;
 import es.golemdr.rrcc.common.mapper.ReservaCustomMapper;
 import es.golemdr.rrcc.common.mapper.ReservaMapper;
@@ -25,6 +27,8 @@ import jakarta.validation.constraints.Min;
 @RequestMapping(UrlConstants.URL_RESERVAS)
 @RestController
 public class ReservasController {
+	
+	public static final String ID_RESERVA = "idReserva";
 	
 	private ReservasService reservasService;
 	
@@ -57,6 +61,13 @@ public class ReservasController {
 		reserva = reservasService.insertarActualizar(reserva);
 		
 		return reservaCustomMapper.toData(reserva);
+	}
+	
+	@DeleteMapping(value = UrlConstants.ID_RESERVA_PATH)
+	public void deleteReserva(@PathVariable(ID_RESERVA) @Min(1) Integer idReserva) {
+				
+		reservasService.borrarReserva(idReserva);
+
 	}
 	
 }

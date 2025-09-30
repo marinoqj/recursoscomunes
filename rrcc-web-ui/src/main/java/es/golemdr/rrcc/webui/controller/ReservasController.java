@@ -50,10 +50,13 @@ public class ReservasController {
 		
 		// TODO - Recuperar dinámicamente
 		idUsuario = "1";
+		
 
 		List<ReservaData> reservas = reservasService.recuperarReservasPorUsuario(idUsuario);
 		map.put("reservas", reservas);
-		map.put("idUsuario", idUsuario);
+		
+		UsuarioData usuario = usuariosService.recuperarUsuarioPorId(idUsuario);
+		map.put("usuario", usuario);
 		
 		return ForwardConstants.FWD_LISTADO_RESERVAS_USUARIO;
 	}
@@ -99,6 +102,16 @@ public class ReservasController {
 
 		return destino;
 	}
+
 	
+	@PostMapping(value = UrlConstants.ANULAR_RESERVA)
+	public String borrar(String idReserva, String idUsuario, Model model, HttpServletRequest request) {
+		
+		reservasService.borrarReserva(idReserva);
+				
+		model.addAttribute("mensaje", "La reserva se anuló correctamente");
+		
+		return listReservasUsuario(idReserva, model.asMap(), request);  // Utilizo dos return para poder pasar el message
+	}
 	
 }

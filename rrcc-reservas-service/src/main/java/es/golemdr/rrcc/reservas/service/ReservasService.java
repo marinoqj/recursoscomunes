@@ -9,5 +9,9 @@ public interface ReservasService {
 	List<Reserva> recuperarReservasPorUsuario(Integer idUsuario);
 	
 	Reserva insertarActualizar(Reserva reserva);
+	
+	Reserva recuperarReservaPorId(Integer idReserva);
+	
+	void borrarReserva(Integer idReserva);
 
 }

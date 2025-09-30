@@ -13,4 +13,6 @@ public interface ReservasService {
 	
 	ReservaData insertarReserva(ReservaData reserva);
 	
+	void borrarReserva(String idReserva);
+	
 }

@@ -32,4 +32,15 @@ public class ReservasServiceImpl extends BaseService implements ReservasService 
 		return webClient.post().uri(server2Name + ":" + port2 + context + RESERVAS_PATH)
 				.body(Mono.just(reserva), ReservaData.class).retrieve().bodyToMono(ReservaData.class).block();
 	}
+
+
+	@Override
+	public void borrarReserva(String id) {
+		webClient.delete()
+		.uri(server2Name + ":" + port2 + context + RESERVAS_PATH + "/" + id)
+		.retrieve()
+		.toBodilessEntity()
+		.block();
+		
+	}
 }

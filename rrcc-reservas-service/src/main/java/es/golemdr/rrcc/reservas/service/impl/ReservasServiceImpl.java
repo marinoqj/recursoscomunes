@@ -43,4 +43,17 @@ public class ReservasServiceImpl implements ReservasService {
 		return reservasRepository.save(reserva);
 	}
 
+	@Override
+	public Reserva recuperarReservaPorId(Integer idReserva) {
+		
+		return reservasRepository.findById(idReserva).get(); 
+	}
+
+	@Override
+	public void borrarReserva(Integer idReserva) {
+
+		reservasRepository.deleteById(idReserva);
+		
+	}
+
 }

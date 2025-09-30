@@ -24,7 +24,8 @@
 
 <form name="formulario" method="post">
 <!-- 	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
-	<input type="hidden" name="idUsuario"/>	
+	<input type="hidden" name="idReserva"/>	
+	<input type="hidden" name="idUsuario" th:value="${usuario.idUsuario}"/>
 </form>
 
 <br>
@@ -32,7 +33,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-				<h4 class="texto-azul"><i class="fas fa-users"></i>&nbsp;&nbsp;Listado de reservas</span></h4>
+				<h4 class="texto-azul"><i class="fas fa-users"></i>&nbsp;&nbsp;Listado de reservas del usuario <span th:text="${usuario.identificador}"></span></span></h4>
 	</div>
 </div>
 <hr class="texto-azul">
@@ -74,7 +75,9 @@
 						<td th:text="${reserva.recurso.descripcionTipoRecurso}" />
 						<td th:text="${#dates.format(reserva.horaInicio, 'HH:mm')}" />
 						<td th:text="${#dates.format(reserva.horaFin, 'HH:mm')}" />
-				        <td>&nbsp;</td> 																							
+				        <td>
+				        	<a href="#" th:onclick="javascript:mostrarConfirm([[${reserva.idReserva}]])"><i class="fa fa-trash fa-lg text-danger" data-toggle="tooltip" title="Anular reserva"></i></a>
+				        </td> 																							
 				</tr>				
 			</tbody>
 		</table>
@@ -109,7 +112,7 @@
 <div class="row">
 	<div class="col-md-10">&nbsp;</div>
 	<div class="col-md-2 text-end">
-			<a th:href="@{'/verNuevaReserva' + ${idUsuario}}" class="btn btn-primary btn-sm">Nueva reserva</a>
+			<a th:href="@{'/verNuevaReserva' + ${usuario.idUsuario}}" class="btn btn-primary btn-sm">Nueva reserva</a>
 	</div>
 </div>
 
@@ -122,7 +125,7 @@
 		<i class="fas fa-times align-bottom" style="cursor:pointer;" data-dismiss="modal"></i>	     
       </div>    
       <div class="modal-body">
-         <p class="text-center">Va a borrar la reserva. ¿Desea continuar?</p>
+         <p class="text-center">Va a anular la reserva. ¿Desea continuar?</p>
       </div>
       <div class="modal-footer">         
          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;Cancelar</button>
@@ -148,17 +151,17 @@
 <script type="text/javascript">
 
 
-function borrarUsuario(idUsuario){
+function anularReserva(idReserva){
 	
-	document.formulario.idUsuario.value = idUsuario;	
-	document.formulario.action="borrarUsuario";
+	document.formulario.idReserva.value = idReserva;	
+	document.formulario.action="anularReserva";
 	document.formulario.submit();
 }
 
-function mostrarConfirm(idUsuario) {
+function mostrarConfirm(idReserva) {
 	var message = "";
 	$("#botonAceptar").click(function() {
-		borrarUsuario(idUsuario);
+		anularReserva(idReserva);
 	});
     $('#confirmModal').modal('show');
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.common.dto.UsuarioData;
+import es.golemdr.rrcc.common.entity.Reserva;
 import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.common.mapper.UsuarioMapper;
 import es.golemdr.rrcc.mantenimiento.controller.constants.UrlConstants;
@@ -66,15 +67,6 @@ public class UsuariosController {
 		return usuarioMapper.toData(usuario);
 	}
 
-	@GetMapping
-	public List<UsuarioData> recuperarUsuarios() {
-
-		List<UsuarioData> result = new ArrayList<UsuarioData>();
-		
-		usuariosService.recuperarUsuarios().stream().toList().forEach(u -> result.add(usuarioMapper.toData(u)));
-
-		return result;
-	}
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.OK)
@@ -91,21 +83,17 @@ public class UsuariosController {
 	}
 
 	@DeleteMapping(value = UrlConstants.ID_USUARIO_PATH)
-	public List<UsuarioData> deleteUsuario(@PathVariable(ID_USUARIO) @Min(1) int idUsuario) {
+	public void deleteUsuario(@PathVariable(ID_USUARIO) @Min(1) int idUsuario) {
 		
 		usuariosService.borrarUsuario(idUsuario);
 		
-		return recuperarUsuarios();
 	}
 	
 	@GetMapping(value = UrlConstants.LISTADO_USUARIOS_COMUNIDAD_PATH)
 	public List<UsuarioData> recuperarUsuariosPorComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
-		
-		List<UsuarioData> result = new ArrayList<UsuarioData>();
 
-		usuariosService.recuperarUsuariosPorComunidad(idComunidad).stream().toList().forEach(u -> result.add(usuarioMapper.toData(u)));
+		return usuariosService.recuperarUsuariosPorComunidad(idComunidad).stream().map(u -> usuarioMapper.toData(u)).toList();
 
-		return result;
 	}
 
 }

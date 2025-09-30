@@ -34,5 +34,6 @@ public class UrlConstants {
 	public static final String LISTADO_RESERVAS_USUARIO = "/listadoReservasUsuario";
 	public static final String VER_NUEVA_RESERVA = "/verNuevaReserva{idUsuario}";
 	public static final String INSERTAR_RESERVA = "/insertarReserva";
+	public static final String ANULAR_RESERVA = "/anularReserva";
 
 }
