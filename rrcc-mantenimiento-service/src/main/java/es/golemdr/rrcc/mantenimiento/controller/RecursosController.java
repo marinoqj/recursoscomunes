@@ -80,7 +80,7 @@ public class RecursosController {
 	}
 
 	@PutMapping
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public RecursoData updateRecurso(@Valid @RequestBody RecursoData recursoData) {
 
 		Recurso entity = recursosService.recuperarRecursoPorId(recursoData.getIdRecurso()).orElseThrow(

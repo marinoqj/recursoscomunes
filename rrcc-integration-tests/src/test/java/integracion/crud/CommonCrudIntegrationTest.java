@@ -1,4 +1,5 @@
 package integracion.crud;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -7,48 +8,52 @@ import org.springframework.http.HttpStatus;
 
 import common.Constantes;
 import integracion.BaseIntegrationTest;
+import integracion.crud.utils.ComunidadExample;
+import integracion.crud.utils.CrudTestable;
 
 
-public class ComunidadCrudIntegrationTest extends BaseIntegrationTest{
+public class CommonCrudIntegrationTest extends BaseIntegrationTest{
 
+	
+	CrudTestable testCase = new ComunidadExample();
 	
     @Test
     void shouldPerformCrudOperations() {
 
-    	String urlComunidades = baseUrl + "/comunidades";
+    	String url = baseUrl + testCase.getUrl();
     	
         // Create
-        String idComunidad = given()
+        String id = given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"nombre\":\"Puerto de Lumbreras 24\"}")
+            .body(testCase.getBody())
         .when()
-            .post(urlComunidades)
+            .post(url)
         .then()
             .statusCode(HttpStatus.CREATED.value()) // 201
-            .extract().path("idComunidad").toString();
+            .extract().path(testCase.getId()).toString();
 
         // Read
         given()
         .when()
-            .get(urlComunidades + "/" + idComunidad)
+            .get(url + "/" + id)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 24"));
+            .body(testCase.getProperty(), equalTo(testCase.getPropertyValueOriginal()));
 
         // Update
         given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"idComunidad\":\"" + idComunidad +  "\", \"nombre\":\"Puerto de Lumbreras 28\"}")
+            .body(testCase.getBodyWithId(id))
         .when()
-            .put(urlComunidades)
+            .put(url)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 28"));
+            .body(testCase.getProperty(), equalTo(testCase.getPropertyValueModified()));
 
         // Delete
         given()
         .when()
-            .delete(urlComunidades + "/" + idComunidad)
+            .delete(url + "/" + id)
         .then()
             .statusCode(HttpStatus.OK.value()); // 200);
     }

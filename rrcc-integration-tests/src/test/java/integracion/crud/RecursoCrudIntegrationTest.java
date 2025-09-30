@@ -9,48 +9,48 @@ import common.Constantes;
 import integracion.BaseIntegrationTest;
 
 
-public class ComunidadCrudIntegrationTest extends BaseIntegrationTest{
+public class RecursoCrudIntegrationTest extends BaseIntegrationTest{
 
 	
     @Test
     void shouldPerformCrudOperations() {
 
-    	String urlComunidades = baseUrl + "/comunidades";
+    	String urlRecursos = baseUrl + "/recursos";
     	
         // Create
-        String idComunidad = given()
+        String idRecurso = given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"nombre\":\"Puerto de Lumbreras 24\"}")
+            .body("{\"tipoRecurso\": \"02\",\"comunidad\": {\"idComunidad\": 2}}")
         .when()
-            .post(urlComunidades)
+            .post(urlRecursos)
         .then()
             .statusCode(HttpStatus.CREATED.value()) // 201
-            .extract().path("idComunidad").toString();
+            .extract().path("idRecurso").toString();
 
         // Read
         given()
         .when()
-            .get(urlComunidades + "/" + idComunidad)
+            .get(urlRecursos + "/" + idRecurso)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 24"));
+            .body("tipoRecurso", equalTo("02"));
 
         // Update
         given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"idComunidad\":\"" + idComunidad +  "\", \"nombre\":\"Puerto de Lumbreras 28\"}")
+            .body("{\"idRecurso\":\"" + idRecurso +  "\", \"tipoRecurso\":\"01\"}")
         .when()
-            .put(urlComunidades)
+            .put(urlRecursos)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 28"));
+            .body("tipoRecurso", equalTo("01"));
 
         // Delete
         given()
         .when()
-            .delete(urlComunidades + "/" + idComunidad)
+            .delete(urlRecursos + "/" + idRecurso)
         .then()
-            .statusCode(HttpStatus.OK.value()); // 200);
+            .statusCode(HttpStatus.OK.value()); // 204);
     }
 	
 }

@@ -92,7 +92,7 @@ public class ComunidadesController {
 	}
 
 	@DeleteMapping(value = UrlConstants.ID_COMUNIDAD_PATH)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public List<ComunidadData> deleteComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
 		
 		comunidadesService.borrarComunidad(idComunidad);

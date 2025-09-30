@@ -77,7 +77,7 @@ public class UsuariosController {
 	}
 
 	@PutMapping
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public UsuarioData updateUsuario(@Valid @RequestBody UsuarioData usuarioData) {
 
 		Usuario entity = usuariosService.recuperarUsuarioPorId(usuarioData.getIdUsuario()).orElseThrow(

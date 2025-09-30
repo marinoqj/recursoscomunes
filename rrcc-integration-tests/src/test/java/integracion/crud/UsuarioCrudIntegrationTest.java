@@ -9,48 +9,48 @@ import common.Constantes;
 import integracion.BaseIntegrationTest;
 
 
-public class ComunidadCrudIntegrationTest extends BaseIntegrationTest{
+public class UsuarioCrudIntegrationTest extends BaseIntegrationTest{
 
 	
     @Test
     void shouldPerformCrudOperations() {
 
-    	String urlComunidades = baseUrl + "/comunidades";
+    	String urlUsuarios = baseUrl + "/usuarios";
     	
         // Create
-        String idComunidad = given()
+        String idUsuario = given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"nombre\":\"Puerto de Lumbreras 24\"}")
+            .body("{\"identificador\": \"22/4G\",\"comunidad\": {\"idComunidad\": 2}}")
         .when()
-            .post(urlComunidades)
+            .post(urlUsuarios)
         .then()
             .statusCode(HttpStatus.CREATED.value()) // 201
-            .extract().path("idComunidad").toString();
+            .extract().path("idUsuario").toString();
 
         // Read
         given()
         .when()
-            .get(urlComunidades + "/" + idComunidad)
+            .get(urlUsuarios + "/" + idUsuario)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 24"));
+            .body("identificador", equalTo("22/4G"));
 
         // Update
         given()
             .contentType(Constantes.CONTENT_TYPE_JSON)
-            .body("{\"idComunidad\":\"" + idComunidad +  "\", \"nombre\":\"Puerto de Lumbreras 28\"}")
+            .body("{\"idUsuario\":\"" + idUsuario +  "\", \"identificador\":\"22/5G\"}")
         .when()
-            .put(urlComunidades)
+            .put(urlUsuarios)
         .then()
             .statusCode(HttpStatus.OK.value()) // 200
-            .body("nombre", equalTo("Puerto de Lumbreras 28"));
+            .body("identificador", equalTo("22/5G"));
 
         // Delete
         given()
         .when()
-            .delete(urlComunidades + "/" + idComunidad)
+            .delete(urlUsuarios + "/" + idUsuario)
         .then()
-            .statusCode(HttpStatus.OK.value()); // 200);
+            .statusCode(HttpStatus.OK.value()); // 204);
     }
 	
 }
