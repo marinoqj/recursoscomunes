@@ -60,7 +60,7 @@
                         <label for="recurso">Recurso</label><span class="form-text text-danger"> *</span>
                         <select class="form-select" th:field="*{idRecurso}">
                             <option value="">Seleccione el recurso a reservar</option>
-                            <option th:each="recurso : ${recursos}" th:text="${recurso.descripcionTipoRecurso}" th:value="${recurso.idRecurso}"></option>
+                            <option th:each="recurso : ${recursos}" th:text="${recurso.tipoRecurso.descripcion}" th:value="${recurso.idRecurso}"></option>
                         </select>
                         <span class="form-text text-danger" th:errors="*{idRecurso}" th:if="${#fields.hasErrors('idRecurso')}"></span>
 					</div>

@@ -10,8 +10,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,24 +21,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 @Entity
-@Table(name = "recursos")
-public class Recurso {
+@Table(name = "tipos_recursos")
+public class TipoRecurso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_RECURSO")
-    private Integer idRecurso;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_TIPO_RECURSO")
-    private TipoRecurso tipoRecurso;
+    @Column(name = "ID_TIPO_RECURSO")
+    private Integer idTipoRecurso;
     
-    @ManyToOne
-	@JoinColumn(name = "ID_COMUNIDAD")
-    private Comunidad comunidad;
-    
+	@Column(name = "DESCRIPCION")
+    private String descripcion;
+	
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recurso")
-    List<Reserva> reservas;
-    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoRecurso")
+    List<Recurso> recursos;
+
 }

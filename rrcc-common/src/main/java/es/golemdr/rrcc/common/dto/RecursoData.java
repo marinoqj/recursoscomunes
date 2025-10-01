@@ -11,8 +11,7 @@ import lombok.Setter;
 public class RecursoData {
 
     private Integer idRecurso;
-    private String tipoRecurso;
-    private String descripcionTipoRecurso;
+    private TipoRecursoData tipoRecurso; 
     private ComunidadData comunidad;
 
 }
