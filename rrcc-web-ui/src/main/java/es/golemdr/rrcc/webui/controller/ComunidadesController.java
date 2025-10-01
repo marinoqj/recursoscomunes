@@ -131,5 +131,16 @@ public class ComunidadesController {
 		
 		return list(model.asMap(), request);
 	}
+
+	
+	@PostMapping(value = UrlConstants.VER_MENU_COMUNIDAD)
+	public String verMenuComunidad(String idComunidad, Model model, HttpServletRequest request) {
+		
+		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
+		model.addAttribute("comunidad", comunidad);
+		
+		return ForwardConstants.FWD_MENU_COMUNIDAD;
+
+	}
 	
 }

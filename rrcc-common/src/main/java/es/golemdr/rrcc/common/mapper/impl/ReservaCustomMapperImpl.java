@@ -28,6 +28,7 @@ public class ReservaCustomMapperImpl implements ReservaCustomMapper {
         reservaData.setHoraInicio( reserva.getHoraInicio() );
         reservaData.setIdReserva( reserva.getIdReserva() );
         reservaData.setIdUsuario( reserva.getIdUsuario() );
+        reservaData.setIdentificador( reserva.getIdentificador() );
         reservaData.setRecurso( recursoMapper.toData( reserva.getRecurso() ) );
 
         return reservaData;

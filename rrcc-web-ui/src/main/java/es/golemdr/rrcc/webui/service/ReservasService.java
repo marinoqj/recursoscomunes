@@ -11,6 +11,8 @@ public interface ReservasService {
 
 	List<ReservaData> recuperarReservasPorUsuario(String idUsuario);
 	
+	List<ReservaData> recuperarReservasPorComunidad(String idComunidad);
+	
 	ReservaData insertarReserva(ReservaData reserva);
 	
 	void borrarReserva(String idReserva);

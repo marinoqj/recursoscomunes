@@ -6,6 +6,7 @@ import java.sql.Time;
 import es.golemdr.rrcc.common.enums.TiposRecursos;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,7 @@ public class Reserva {
 	@Column(name = "HORA_FIN")
 	private Time horaFin;
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 	
@@ -44,7 +45,14 @@ public class Reserva {
 	@Transient
 	private Integer idUsuario;
 	
+	@Transient
+	private String identificador;
+	
     public Integer getIdUsuario() {
     	return usuario.getIdUsuario();
+    }
+    
+    public String getIdentificador() {
+    	return usuario.getIdentificador();
     }
 }

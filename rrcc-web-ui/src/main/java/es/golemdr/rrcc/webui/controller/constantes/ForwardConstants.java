@@ -7,6 +7,7 @@ public class ForwardConstants {
 	public static final String FWD_LISTADO_COMUNIDADES = "comunidades/listado-comunidades";
 	public static final String FWD_COMUNIDAD_FORM = "comunidades/comunidad-form";
 	public static final String RED_LISTADO_COMUNIDADES = "redirect:listadoComunidades";
+	public static final String FWD_MENU_COMUNIDAD = "comunidades/menu-comunidad";	
 	
 	public static final String FWD_LISTADO_USUARIOS = "usuarios/listado-usuarios";
 	public static final String FWD_USUARIO_FORM = "usuarios/usuario-form";
@@ -18,6 +19,7 @@ public class ForwardConstants {
 	public static final String RED_LISTADO_RECURSOS = "redirect:listadoRecursos";
 	
 	public static final String FWD_LISTADO_RESERVAS_USUARIO = "reservas/listado-reservas-usuario";
+	public static final String FWD_LISTADO_RESERVAS_COMUNIDAD = "reservas/listado-reservas-comunidad";
 	public static final String FWD_RESERVA_FORM = "reservas/reserva-form";
 
 }

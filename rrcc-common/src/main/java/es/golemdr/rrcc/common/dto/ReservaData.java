@@ -19,6 +19,8 @@ public class ReservaData {
 	private Time horaFin;
 	// No mapeo el usuario completo para evitar la duplicidad de la comunidad con la del recurso (que genera problemas en JSON)
 	private Integer idUsuario;
+	private String identificador;
+	
 	private RecursoData recurso;
 	
 

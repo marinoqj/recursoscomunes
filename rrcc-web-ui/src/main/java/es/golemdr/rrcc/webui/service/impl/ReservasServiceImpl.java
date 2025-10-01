@@ -26,6 +26,16 @@ public class ReservasServiceImpl extends BaseService implements ReservasService 
 				.block();
 	}
 	
+	@Override
+	public List<ReservaData> recuperarReservasPorComunidad(String idComunidad) {
+		return webClient.get()
+				.uri(server2Name + ":" + port2 + context + RESERVAS_PATH + "/comunidad/" + idComunidad)
+				.retrieve()
+				.bodyToFlux(ReservaData.class)
+				.collectList()
+				.block();
+	}
+	
 	
 	@Override
 	public ReservaData insertarReserva(ReservaData reserva) {

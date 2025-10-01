@@ -36,13 +36,16 @@ public class ReservasController {
 	
 	private RecursosService recursosService;
 	
+	private ComunidadesService comunidadesService;
+	
 
 	public ReservasController(ReservasService reservasService, UsuariosService usuariosService,
-			RecursosService recursosService) {
+			RecursosService recursosService, ComunidadesService comunidadesService) {
 		super();
 		this.reservasService = reservasService;
 		this.usuariosService = usuariosService;
 		this.recursosService = recursosService;
+		this.comunidadesService= comunidadesService;
 	}
 
 	@GetMapping(value=UrlConstants.LISTADO_RESERVAS_USUARIO)
@@ -59,6 +62,18 @@ public class ReservasController {
 		map.put("usuario", usuario);
 		
 		return ForwardConstants.FWD_LISTADO_RESERVAS_USUARIO;
+	}
+
+	@PostMapping(value=UrlConstants.LISTADO_RESERVAS_COMUNIDAD)
+	public String listReservasComunidad(String idComunidad, Map<String, Object> map, HttpServletRequest request){
+		
+		List<ReservaData> reservas = reservasService.recuperarReservasPorComunidad(idComunidad);
+		map.put("reservas", reservas);
+		
+		ComunidadData comunidad = comunidadesService.recuperarComunidadPorId(idComunidad);
+		map.put("comunidad", comunidad);
+		
+		return ForwardConstants.FWD_LISTADO_RESERVAS_COMUNIDAD;
 	}
 	
 	@GetMapping(value = UrlConstants.VER_NUEVA_RESERVA)

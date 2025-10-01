@@ -8,6 +8,8 @@ public interface ReservasService {
 	
 	List<Reserva> recuperarReservasPorUsuario(Integer idUsuario);
 	
+	List<Reserva> recuperarReservasPorComunidad(Integer idComunidad);
+	
 	Reserva insertarActualizar(Reserva reserva);
 	
 	Reserva recuperarReservaPorId(Integer idReserva);

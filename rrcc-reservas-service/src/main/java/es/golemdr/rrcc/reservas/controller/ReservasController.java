@@ -1,6 +1,5 @@
 package es.golemdr.rrcc.reservas.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.golemdr.rrcc.common.dto.ReservaData;
-import es.golemdr.rrcc.common.dto.UsuarioData;
 import es.golemdr.rrcc.common.entity.Reserva;
 import es.golemdr.rrcc.common.mapper.ReservaCustomMapper;
-import es.golemdr.rrcc.common.mapper.ReservaMapper;
 import es.golemdr.rrcc.reservas.controller.constants.UrlConstants;
 import es.golemdr.rrcc.reservas.service.ReservasService;
 import jakarta.validation.Valid;
@@ -29,6 +26,8 @@ import jakarta.validation.constraints.Min;
 public class ReservasController {
 	
 	public static final String ID_RESERVA = "idReserva";
+	public static final String ID_USUARIO = "idUsuario";
+	public static final String ID_COMUNIDAD = "idComunidad";
 	
 	private ReservasService reservasService;
 	
@@ -40,16 +39,20 @@ public class ReservasController {
 		this.reservaCustomMapper = reservaCustomMapper;
 	}
 
-	public static final String ID_USUARIO = "idUsuario";
+
 
 	@GetMapping(value = UrlConstants.LISTADO_RESERVAS_USUARIO_PATH)
 	public List<ReservaData> recuperarReservasPorUsuario(@PathVariable(ID_USUARIO) @Min(1) int idUsuario) {
-		
-		List<ReservaData> result = new ArrayList<ReservaData>();
-		
-		reservasService.recuperarReservasPorUsuario(idUsuario).stream().toList().forEach(r -> result.add(reservaCustomMapper.toData(r)));
+				
+		return reservasService.recuperarReservasPorUsuario(idUsuario).stream().map(r -> reservaCustomMapper.toData(r)).toList();
+	}
+	
+	@GetMapping(value = UrlConstants.LISTADO_RESERVAS_COMUNIDAD_PATH)
+	public List<ReservaData> recuperarReservasPorComunidad(@PathVariable(ID_COMUNIDAD) @Min(1) int idComunidad) {
 
-		return result;
+		List<Reserva> reservas = reservasService.recuperarReservasPorComunidad(idComunidad);
+		
+		return reservas.stream().map(r -> reservaCustomMapper.toData(r)).toList();
 	}
 	
 	@PostMapping

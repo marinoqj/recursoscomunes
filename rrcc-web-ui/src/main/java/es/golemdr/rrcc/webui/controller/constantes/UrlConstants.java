@@ -11,6 +11,7 @@ public class UrlConstants {
 	public static final String EDITAR_COMUNIDAD = "/editarComunidad";
 	public static final String ACTUALIZAR_COMUNIDAD = "/actualizarComunidad";	
 	public static final String BORRAR_COMUNIDAD = "/borrarComunidad";
+	public static final String VER_MENU_COMUNIDAD = "/verMenuComunidad";
 	
 	// Usuarios
 	public static final String LISTADO_USUARIOS_COMUNIDAD = "/listadoUsuariosComunidad";
@@ -32,6 +33,7 @@ public class UrlConstants {
 	
 	// Reservas
 	public static final String LISTADO_RESERVAS_USUARIO = "/listadoReservasUsuario";
+	public static final String LISTADO_RESERVAS_COMUNIDAD = "/listadoReservasComunidad";
 	public static final String VER_NUEVA_RESERVA = "/verNuevaReserva{idUsuario}";
 	public static final String INSERTAR_RESERVA = "/insertarReserva";
 	public static final String ANULAR_RESERVA = "/anularReserva";

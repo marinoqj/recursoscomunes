@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import es.golemdr.rrcc.common.entity.Comunidad;
 import es.golemdr.rrcc.common.entity.Reserva;
 import es.golemdr.rrcc.common.entity.Usuario;
 import es.golemdr.rrcc.reservas.repository.ReservasRepository;
@@ -24,8 +25,26 @@ public class ReservasServiceImpl implements ReservasService {
 	public List<Reserva> recuperarReservasPorUsuario(Integer idUsuario) {
 
 		Usuario usuario = new Usuario();
-		usuario.setIdUsuario(idUsuario);
+		usuario.setIdUsuario(idUsuario);		
 		
+		Reserva reserva = new Reserva();
+		reserva.setUsuario(usuario);
+		
+		Example<Reserva> example = Example.of(reserva);		
+		
+		return reservasRepository.findAll(example);
+		
+		
+	}
+	
+	@Override
+	public List<Reserva> recuperarReservasPorComunidad(Integer idComunidad) {
+
+		Usuario usuario = new Usuario();
+		
+		Comunidad comunidad = new Comunidad();
+		comunidad.setIdComunidad(idComunidad);
+		usuario.setComunidad(comunidad);		
 		
 		Reserva reserva = new Reserva();
 		reserva.setUsuario(usuario);

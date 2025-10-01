@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+	<head th:replace="fragments/head :: head('Menu comunidad')"></head>
+
+	<body>
+
+		<header>
+			<nav th:replace="fragments/navbar :: navbar"></nav>
+		</header>
+
+		<main>
+			<div class="container" style="min-height: 90vh">
+
+				<br><br><br><br>
+
+				<form name="formulario" method="post">
+<!-- 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+					<input type="hidden" name="idComunidad" th:value="${comunidad.idComunidad}"/>
+				</form>
+
+				<div class="row">
+					<div class="col-md-12 text-end">			
+						<a th:href="@{/listadoComunidades}" class="texto-azul" style="text-decoration: none; cursor:pointer;"><i class="fas fa-arrow-circle-left"></i> &nbsp;&nbsp;Volver</a>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h4 class="texto-azul"><i class="fa fa-building"></i>&nbsp;&nbsp;Menú comunidad <span th:text="${comunidad.nombre}"></span></h4>				
+					</div>
+				</div>
+				
+				<hr class="texto-azul">
+
+				<div class="row" th:if="${mensaje != null}">
+					<div class="col-md-12 text-center">			
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							<span th:text="${mensaje}"></span></b>
+						</div>
+					</div>
+				</div>
+				
+				<br><br>
+ 
+				<div class="row">
+				
+					<div class="col-md-3"> 
+						<div class="card text-center shadow">
+							<div class="card-body">
+								<h5 class="card-title">Usuarios</h5>
+								<h1><a href="#" th:onclick="javascript:listadoUsuariosComunidad([[${comunidad.idComunidad}]])"><i class="fa fa-users texto-azul stretched-link" data-toggle="tooltip" title="Usuarios"></i></a></h1>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-3"> 
+						<div class="card text-center shadow">
+							<div class="card-body">
+						    	<h5 class="card-title">Recursos</h5>
+								<h1><a href="#" th:onclick="javascript:listadoRecursosComunidad([[${comunidad.idComunidad}]])"><i class="fa fa-list-alt texto-azul stretched-link" data-toggle="tooltip" title="Recursos"></i></a></h1>
+						  </div>
+						</div>
+					</div>
+					
+					<div class="col-md-3"> 
+						 <div class="card text-center shadow">
+							<div class="card-body">
+								<h5 class="card-title">Reservas</h5>
+								<h1><a href="#" th:onclick="javascript:listadoReservasComunidad([[${comunidad.idComunidad}]])"><i class="fas fa-book texto-azul stretched-link" data-toggle="tooltip" title="Reservas"></i></a></h1>
+						  	</div>
+						</div>
+					</div>					
+				
+					<div class="col-md-3"> 
+						<div class="card text-center shadow">
+							<div class="card-body">
+							    <h5 class="card-title">Otros</h5>
+								<h1><a href="#" th:onclick="javascript:verConceptosVarios()"><i class="fa fa-clone texto-azul stretched-link" data-toggle="tooltip" title="Varios"></i></a></h1>
+							</div>
+						</div>
+					</div>
+						
+				</div>
+
+			</div>
+
+		</main>
+		
+<script type="text/javascript">
+
+
+function listadoUsuariosComunidad(idComunidad){
+	
+	document.formulario.idComunidad.value = idComunidad;	
+	document.formulario.action="listadoUsuariosComunidad";
+	document.formulario.submit();
+}
+
+function listadoRecursosComunidad(idComunidad){
+	
+	document.formulario.idComunidad.value = idComunidad;	
+	document.formulario.action="listadoRecursosComunidad";
+	document.formulario.submit();
+}
+
+function listadoReservasComunidad(idComunidad){
+	
+	document.formulario.idComunidad.value = idComunidad;	
+	document.formulario.action="listadoReservasComunidad";
+	document.formulario.submit();
+}
+
+</script>		
+
+		<footer th:replace="fragments/footer :: footer"></footer>
+
+
+	</body>
+</html>
