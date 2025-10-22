@@ -2,9 +2,10 @@ spring:
   application:
     name: mantenimiento-service
   datasource:
-    url: jdbc:mysql://localhost:3306/rrcc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:p6spy:mysql://localhost:3306/rrcc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: rrcc
     password: rrcc
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver	
   jpa:
     properties:
       hibernate:
@@ -16,5 +17,9 @@ server:
   
 test:
   value: Hello from config server
-
+  
+logging:
+  level:
+    root: "warn"
+    com.p6spy: "error"
   
